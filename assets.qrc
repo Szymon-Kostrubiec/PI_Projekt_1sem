@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>Assets/backgroundOknoStartowe.jpg</file>
+        <file>Assets/player1.png</file>
+        <file>Assets/player2.png</file>
+        <file>Assets/player3.png</file>
+        <file>Assets/player4.png</file>
+        <file>Assets/drabina.png</file>
+        <file>Assets/waz.png</file>
+        <file>Assets/debugDot.png</file>
+        <file>Assets/PlanszaNowa.png</file>
+    </qresource>
+    <qresource prefix="/styles">
+        <file>Assets/QWidget.qss</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>Assets/soundBtnPressed.wav</file>
+    </qresource>
+</RCC>
