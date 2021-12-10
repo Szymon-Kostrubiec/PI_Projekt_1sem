@@ -16,7 +16,7 @@ public:
     explicit OknoGry(QWidget *parent = nullptr);
     ~OknoGry();
 public slots:
-    void przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QGraphicsPixmapItem *> tekstury);
+    void przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury);
 private slots:
     void on_pushButton_2_clicked();
 

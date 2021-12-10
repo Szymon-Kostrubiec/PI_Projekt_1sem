@@ -50,7 +50,7 @@ private:
     long ostatnieZiarno;
     int liczbaGraczy;
 signals:
-    void przygotuj(int liczbaGraczy, QStringList nazwy, long ziarno, QList<QGraphicsPixmapItem *> tekstury);
+    void przygotuj(int liczbaGraczy, QStringList nazwy, long ziarno, QList<QPixmap> tekstury);
 };
 
 #endif // OKNOWYBORUGRACZY_H

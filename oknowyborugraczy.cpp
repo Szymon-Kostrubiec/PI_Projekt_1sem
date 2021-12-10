@@ -67,9 +67,9 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
         nazwy.append(ui->nazwaGracz4->text());
         liczbaGraczy++;
     }
-    QList<QGraphicsPixmapItem *> tekstury;
+    QList<QPixmap> tekstury;
     for(int i = 0; i < liczbaGraczy; i++) {
-        tekstury.append(oknaZGraczami.at(i)->jakaTekstura());
+        tekstury.append(oknaZGraczami.at(i)->jakaTekstura()->pixmap());
     }
     if (liczbaGraczy  > 1) {
         emit przygotuj(liczbaGraczy, nazwy, ui->ziarnoGeneratora->text().toLong(), tekstury);

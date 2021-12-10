@@ -18,7 +18,7 @@ OknoGry::~OknoGry()
     delete ui;
 }
 
-void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QGraphicsPixmapItem *> tekstury) //dodac jakis cel tym teksturom
+void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury) //dodac jakis cel tym teksturom
 {
     this->liczbaGraczy = liczba;
     this->nazwyGraczy = nazwy;
