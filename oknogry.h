@@ -2,6 +2,7 @@
 #define OKNOGRY_H
 
 #include <QDialog>
+#include <QRandomGenerator>
 #include "plansza.h"
 #include "pionek.h"
 
@@ -19,9 +20,13 @@ public:
 public slots:
     void przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury);
 private slots:
-    void on_pushButton_2_clicked();
+
+    void on_btnZakoncz_clicked();
+
+    void on_btnRzut_clicked();
 
 private:
+    int aktualnyPionek;
     Ui::OknoGry *ui;
     int liczbaGraczy;
     long ziarnoGeneratora;

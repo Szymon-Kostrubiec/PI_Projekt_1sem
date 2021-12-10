@@ -11,6 +11,7 @@ OknoGry::OknoGry(QWidget *parent) :
     this->plansza = new Plansza(true, this);
     ui->viewPlansza->setScene(plansza);
 
+    aktualnyPionek = 0;
 }
 
 OknoGry::~OknoGry()
@@ -48,8 +49,19 @@ void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixma
     ui->labelZiarno->setText("Obecne ziarno generatora: " + QString::number(ziarnoGeneratora));
 }
 
-void OknoGry::on_pushButton_2_clicked()
+void OknoGry::on_btnZakoncz_clicked()
 {
     this->done(Rejected);
+}
+
+
+void OknoGry::on_btnRzut_clicked()
+{
+    int losowa = QRandomGenerator::global()->generate() % 6 + 1;
+    qDebug() << "Gracz " << aktualnyPionek + 1 << " wylosowal " << losowa;
+    gracze.at(aktualnyPionek)->przesun(losowa);
+    aktualnyPionek++;
+    if (aktualnyPionek >= liczbaGraczy) aktualnyPionek = 0;
+    ui->labelJestTura->setText("Jest tura gracza " + QString::number(aktualnyPionek + 1));
 }
 

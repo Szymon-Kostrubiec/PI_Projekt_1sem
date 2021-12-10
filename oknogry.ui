@@ -191,11 +191,11 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btnRzut">
    <property name="geometry">
     <rect>
-     <x>1050</x>
-     <y>220</y>
+     <x>1040</x>
+     <y>300</y>
      <width>231</width>
      <height>121</height>
     </rect>
@@ -217,17 +217,38 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="btnZakoncz">
    <property name="geometry">
     <rect>
-     <x>1100</x>
-     <y>900</y>
-     <width>141</width>
-     <height>41</height>
+     <x>1050</x>
+     <y>780</y>
+     <width>211</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="text">
     <string>Zakończ</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelJestTura">
+   <property name="geometry">
+    <rect>
+     <x>1030</x>
+     <y>220</y>
+     <width>251</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Jest tura gracza 1.</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <zorder>player1Label</zorder>
@@ -238,10 +259,11 @@
   <zorder>player3Score</zorder>
   <zorder>player4Label</zorder>
   <zorder>player4Score</zorder>
-  <zorder>pushButton</zorder>
+  <zorder>btnRzut</zorder>
   <zorder>labelZiarno</zorder>
   <zorder>viewPlansza</zorder>
-  <zorder>pushButton_2</zorder>
+  <zorder>btnZakoncz</zorder>
+  <zorder>labelJestTura</zorder>
  </widget>
  <resources/>
  <connections/>
