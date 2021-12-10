@@ -5,6 +5,7 @@ OknoGry::OknoGry(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::OknoGry)
 {
+    this->czyGraZakonczona = false;
     ui->setupUi(this);
     this->setWindowTitle("Węże i drabiny. Tura 1.");
 
@@ -51,7 +52,12 @@ void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixma
 
 void OknoGry::on_btnZakoncz_clicked()
 {
-    this->done(Rejected);
+    if (czyGraZakonczona) {
+        this->done(Accepted);
+    }
+    else {
+        this->done(Rejected);
+    }
 }
 
 
@@ -63,5 +69,15 @@ void OknoGry::on_btnRzut_clicked()
     aktualnyPionek++;
     if (aktualnyPionek >= liczbaGraczy) aktualnyPionek = 0;
     ui->labelJestTura->setText("Jest tura gracza " + QString::number(aktualnyPionek + 1));
+    if (gracze.at(aktualnyPionek)->jakiePole() == 100) {
+        zwyciestwo(gracze.at(aktualnyPionek)->nazwaGracza);
+    }
+}
+
+void OknoGry::zwyciestwo(QString nazwaZwyciezcy)
+{
+    ui->btnRzut->setEnabled(false);
+    ui->labelZwyciestwo->setText("Zwyciężył " + nazwaZwyciezcy);
+
 }
 

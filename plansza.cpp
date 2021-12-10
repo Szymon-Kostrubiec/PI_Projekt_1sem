@@ -43,6 +43,7 @@ void Plansza::generujPlansze(long ziarno)
 
 QPointF Plansza::wspolrzednePolaGry(int nrPola)
 {
+    if (nrPola % 10 == 0) nrPola--;
     int x{};
     if (nrPola / 10 % 2 == 0) {
         x = nrPola % 10;
@@ -58,6 +59,10 @@ QPointF Plansza::wspolrzednePolaGry(int nrPola)
     y = 10 - nrPola / 10;
     y *= 100;
     y -= 50;
+    if (nrPola % 10 == 0) {
+        if (nrPola % 10 % 2 == 0) x -= 100;
+        else x += 100;
+    }
 //    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
     return QPointF(x, y);
 }

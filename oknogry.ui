@@ -251,6 +251,31 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QLabel" name="labelZwyciestwo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>1011</width>
+     <height>231</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>68</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+     <underline>false</underline>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <zorder>player1Label</zorder>
   <zorder>player1Score</zorder>
   <zorder>player2Label</zorder>
@@ -264,6 +289,7 @@
   <zorder>viewPlansza</zorder>
   <zorder>btnZakoncz</zorder>
   <zorder>labelJestTura</zorder>
+  <zorder>labelZwyciestwo</zorder>
  </widget>
  <resources/>
  <connections/>

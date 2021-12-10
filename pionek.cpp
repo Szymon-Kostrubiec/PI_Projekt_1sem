@@ -16,6 +16,7 @@ Pionek::Pionek(QPixmap tekstura, QString nazwa, QObject *parent)
 void Pionek::przesun(int oIle)
 {
     this->poleKoncowe = aktualnePole + oIle;
+    if (poleKoncowe > 100) poleKoncowe = 100;
     czasPrzesuwania->start(czasAnimacji);
 }
 

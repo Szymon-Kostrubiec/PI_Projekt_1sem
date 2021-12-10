@@ -26,6 +26,8 @@ private slots:
     void on_btnRzut_clicked();
 
 private:
+    void zwyciestwo(QString nazwaZwyciezcy);
+
     int aktualnyPionek;
     Ui::OknoGry *ui;
     int liczbaGraczy;
@@ -33,6 +35,7 @@ private:
     QStringList nazwyGraczy;
     Plansza * plansza;
     QList<Pionek *> gracze;
+    bool czyGraZakonczona;
 };
 
 #endif // OKNOGRY_H
