@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "plansza.h"
+#include "pionek.h"
 
 namespace Ui {
 class OknoGry;
@@ -26,6 +27,7 @@ private:
     long ziarnoGeneratora;
     QStringList nazwyGraczy;
     Plansza * plansza;
+    QList<Pionek *> gracze;
 };
 
 #endif // OKNOGRY_H

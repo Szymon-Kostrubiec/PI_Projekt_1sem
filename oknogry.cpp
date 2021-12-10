@@ -18,7 +18,7 @@ OknoGry::~OknoGry()
     delete ui;
 }
 
-void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury) //dodac jakis cel tym teksturom
+void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury)
 {
     this->liczbaGraczy = liczba;
     this->nazwyGraczy = nazwy;
@@ -40,6 +40,10 @@ void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixma
             break;
         default:
             qDebug() << "Wystapil blad w instrukcji switch case.";
+    }
+    for (int i = 0; i < liczbaGraczy; i++) {
+        gracze.append(new Pionek(tekstury.at(i), nazwyGraczy.at(i)));
+        plansza->addItem(gracze.at(i)->grafika);
     }
     ui->labelZiarno->setText("Obecne ziarno generatora: " + QString::number(ziarnoGeneratora));
 }

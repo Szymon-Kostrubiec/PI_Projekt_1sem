@@ -41,6 +41,27 @@ void Plansza::generujPlansze(long ziarno)
     }
 }
 
+QPointF Plansza::wspolrzednePolaGry(int nrPola)
+{
+    int x{};
+    if (nrPola / 10 % 2 == 0) {
+        x = nrPola % 10;
+        x *= 100;
+        x -= 50;
+    }
+    else {
+        x = 10 - nrPola % 10;
+        x *= 100;
+        x += 50;
+    }
+    int y{};
+    y = 10 - nrPola / 10;
+    y *= 100;
+    y -= 50;
+//    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
+    return QPointF(x, y);
+}
+
 void Plansza::generujZestawPol()
 {
     qDebug() << "Rozpoczeto generacje drabin";

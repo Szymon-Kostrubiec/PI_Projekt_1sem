@@ -16,6 +16,7 @@ SOURCES += \
     mainwindow.cpp \
     oknogry.cpp \
     oknowyborugraczy.cpp \
+    pionek.cpp \
     plansza.cpp \
     wyswietlaniegraczy.cpp
 
@@ -24,6 +25,7 @@ HEADERS += \
     mainwindow.h \
     oknogry.h \
     oknowyborugraczy.h \
+    pionek.h \
     plansza.h \
     wyswietlaniegraczy.h
 

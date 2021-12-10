@@ -13,7 +13,7 @@ public:
     explicit Plansza(bool czyFullScale, QObject *parent = nullptr);
     ~Plansza();
     void generujPlansze(long ziarno);
-
+    static QPointF wspolrzednePolaGry(int nrPola);
 signals:
 
 private:
