@@ -5,14 +5,19 @@ OknoGry::OknoGry(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::OknoGry)
 {
-    this->czyGraZakonczona = false;
+    //kwestie graficzne
     ui->setupUi(this);
     this->setWindowTitle("Węże i drabiny. Tura 1.");
+    aniBtnRzut = new QPropertyAnimation(ui->btnRzut, "geometry");
+    aniBtnRzut->setKeyValueAt(0, QRectF(1040, 300, 230, 120));
+    aniBtnRzut->setKeyValueAt(0.5, QRectF(1060, 320, 190, 80));
+    aniBtnRzut->setKeyValueAt(1, QRectF(1040, 300, 230, 120));
 
     this->plansza = new Plansza(true, this);
     ui->viewPlansza->setScene(plansza);
 
     aktualnyPionek = 0;
+    this->czyGraZakonczona = false;
 }
 
 OknoGry::~OknoGry()
@@ -63,6 +68,7 @@ void OknoGry::on_btnZakoncz_clicked()
 
 void OknoGry::on_btnRzut_clicked()
 {
+    aniBtnRzut->start();
     int losowa = QRandomGenerator::global()->generate() % 6 + 1;
     qDebug() << "Gracz " << aktualnyPionek + 1 << " wylosowal " << losowa;
     gracze.at(aktualnyPionek)->przesun(losowa);

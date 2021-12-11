@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QRandomGenerator>
+#include <QPropertyAnimation>
+
 #include "plansza.h"
 #include "pionek.h"
 
@@ -36,6 +38,7 @@ private:
     Plansza * plansza;
     QList<Pionek *> gracze;
     bool czyGraZakonczona;
+    QPropertyAnimation * aniBtnRzut;
 };
 
 #endif // OKNOGRY_H

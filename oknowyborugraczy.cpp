@@ -11,14 +11,14 @@ oknoWyboruGraczy::oknoWyboruGraczy(QWidget *parent) :
     this->setFixedSize(1000, 700);
     //animacje
     aniBtnGraj = new QPropertyAnimation(ui->btnGraj, "geometry");
-    aniBtnGraj->setKeyValueAt(0, QRectF(560, 560, 340, 90));    //potrzebny fix, zmienily sie koordynaty
-    aniBtnGraj->setKeyValueAt(0.5f, QRectF(580, 580, 330, 80));
-    aniBtnGraj->setKeyValueAt(1, QRectF(560, 560, 340, 90));
+    aniBtnGraj->setKeyValueAt(0, QRectF(600, 570, 340, 90));
+    aniBtnGraj->setKeyValueAt(0.5f, QRectF(620, 590, 300, 50));
+    aniBtnGraj->setKeyValueAt(1, QRectF(600, 570, 340, 90));
 
     aniBtnStworz = new QPropertyAnimation(ui->btnNowaPlansza, "geometry");
-    aniBtnStworz->setKeyValueAt(0, QRectF(570, 410, 340, 50));
-    aniBtnStworz->setKeyValueAt(0.5f, QRectF(590, 430, 330, 40));
-    aniBtnStworz->setKeyValueAt(1, QRectF(570, 410, 340, 50));
+    aniBtnStworz->setKeyValueAt(0, QRectF(600, 520, 340, 50));
+    aniBtnStworz->setKeyValueAt(0.5f, QRectF(620, 540, 300, 10));
+    aniBtnStworz->setKeyValueAt(1, QRectF(600, 520, 340, 50));
     //zmienne programowe
     ostatnieZiarno = 0l;
     liczbaGraczy = 0;
@@ -46,7 +46,7 @@ oknoWyboruGraczy::~oknoWyboruGraczy()
 
 void oknoWyboruGraczy::on_btnGraj_clicked()
 {
-/*    aniBtnGraj->start();   */       //potrzebny fix
+    aniBtnGraj->start();
     qDebug() << "Liczba graczy " << liczbaGraczy;
     QStringList nazwy;
     //potrzebne walidacje: niewybrania tych samych pionkow, niewybrania tych samych nazw
@@ -83,7 +83,7 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
 void oknoWyboruGraczy::on_btnNowaPlansza_clicked()
 {
     //potrzebna walidacja wprowadzonej zmiennej (czy jest cyfra)
-//    aniBtnStworz->start();  //potrzebny fix
+    aniBtnStworz->start();
     if (ui->ziarnoGeneratora->text() == "" or ostatnieZiarno == ui->ziarnoGeneratora->text().toLong()) {
         ui->ziarnoGeneratora->setText(QString::number(QRandomGenerator::global()->generate()));
     }
