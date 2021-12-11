@@ -13,7 +13,8 @@ public:
     explicit Pionek(QPixmap tekstura, QString nazwa, QObject *parent = nullptr);
     QGraphicsPixmapItem * grafika;
     void przesun(int oIle);
-    int jakiePole() {return this->aktualnePole;}        //ta funkcja jest celowo inline
+    void wymusPrzesuniecie(int nrPola);
+    int jakiePole() {qDebug() << aktualnePole; return this->aktualnePole;}        //ta funkcja jest celowo inline
     QString nazwaGracza;
 signals:
 private:

@@ -20,6 +20,12 @@ void Pionek::przesun(int oIle)
     czasPrzesuwania->start(czasAnimacji);
 }
 
+void Pionek::wymusPrzesuniecie(int nrPola)
+{
+    this->aktualnePole = nrPola;
+    this->grafika->setPos(Plansza::wspolrzednePolaGry(this->aktualnePole));
+}
+
 void Pionek::animacjaPrzesuwania()
 {
     this->aktualnePole++;

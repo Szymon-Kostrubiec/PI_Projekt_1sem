@@ -14,6 +14,7 @@ public:
     ~Plansza();
     void generujPlansze(long ziarno);
     static QPointF wspolrzednePolaGry(int nrPola);
+    int czyToPoleJestAkcyjne(int nrPola); //argumentem jest numer pola, zwraca o ile pionek powinien sie przesunac, albo 0 jesli nie trafil na akcyjne pole
 signals:
 
 private:

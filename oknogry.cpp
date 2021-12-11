@@ -79,6 +79,25 @@ void OknoGry::on_btnRzut_clicked()
     int losowa = QRandomGenerator::global()->generate() % 6 + 1;
     qDebug() << "Gracz " << aktualnyPionek + 1 << " wylosowal " << losowa;
     gracze.at(aktualnyPionek)->przesun(losowa);
+    switch (aktualnyPionek) {       //czemu to aktualizuje 1 iteracje do tylu?
+    case 0:
+        ui->player1Score->setText(QString::number(gracze.at(aktualnyPionek)->jakiePole()));
+        break;
+    case 1:
+        ui->player2Score->setText(QString::number(gracze.at(aktualnyPionek)->jakiePole()));
+        break;
+    case 2:
+        ui->player3Score->setText(QString::number(gracze.at(aktualnyPionek)->jakiePole()));
+        break;
+    case 3:
+        ui->player4Score->setText(QString::number(gracze.at(aktualnyPionek)->jakiePole()));
+        break;
+    }
+    int przesuniecie{};
+    if ((przesuniecie = plansza->czyToPoleJestAkcyjne(gracze.at(aktualnyPionek)->jakiePole()))) {   //celowo przez wartosc przypisania
+        qDebug() << "Pionek " << aktualnyPionek + 1 << " znalazl sie na akcyjnym polu nr " << przesuniecie;
+        gracze.at(aktualnyPionek)->wymusPrzesuniecie(przesuniecie);
+    }
     aktualnyPionek++;
     if (aktualnyPionek >= liczbaGraczy) aktualnyPionek = 0;
     ui->labelJestTura->setText("Jest tura gracza " + QString::number(aktualnyPionek + 1));

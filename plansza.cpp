@@ -67,6 +67,13 @@ QPointF Plansza::wspolrzednePolaGry(int nrPola)
     return QPointF(x, y);
 }
 
+int Plansza::czyToPoleJestAkcyjne(int nrPola)
+{
+    if (polaDrabiny.count(nrPola)) return celeDrabiny.at(polaDrabiny.indexOf(nrPola));
+    if (polaWeze.count(nrPola)) return celeWeze.at(celeWeze.indexOf(nrPola));
+    return 0;
+}
+
 void Plansza::generujZestawPol()
 {
     qDebug() << "Rozpoczeto generacje drabin";
