@@ -13,12 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     QPalette palette;
     palette.setBrush(QPalette::Window, background);
     this->setPalette(palette);
-
     this->setFixedSize(800, 600);
-    //kwestie dzwiekowe Pominete bo kompilator nie jest szczesliwy
-//    sfxPrzycisk.setSource(QUrl::fromLocalFile(":/sounds/Assets/soundBtnPressed.wav"));
-//    sfxPrzycisk.setLoopCount(1);
-//    sfxPrzycisk.setVolume(0.25f);
+
     //zmienne programowe
     oknoW = new CreditsWindow;
     oknoWyboru = new oknoWyboruGraczy;
@@ -32,6 +28,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnGraj_clicked()
 {
+
     this->hide();
     QObject::connect(oknoWyboru, &oknoWyboruGraczy::przygotuj, oknoG, &OknoGry::przygotuj);
     int wybor = oknoWyboru->exec();

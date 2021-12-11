@@ -8,6 +8,13 @@ OknoGry::OknoGry(QWidget *parent) :
     //kwestie graficzne
     ui->setupUi(this);
     this->setWindowTitle("Węże i drabiny. Tura 1.");
+    this->setFixedSize(1280, 1050);
+    QPixmap background(":/img/Assets/backgroundOknoStartowe.jpg");
+    background = background.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, background);
+    this->setPalette(palette);
+
     aniBtnRzut = new QPropertyAnimation(ui->btnRzut, "geometry");
     aniBtnRzut->setKeyValueAt(0, QRectF(1040, 300, 230, 120));
     aniBtnRzut->setKeyValueAt(0.5, QRectF(1060, 320, 190, 80));

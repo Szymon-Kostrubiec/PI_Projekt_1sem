@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QPropertyAnimation>
-#include <QSoundEffect>
+#include <QMediaPlayer>
 
 #include "creditswindow.h"
 #include "oknowyborugraczy.h"
@@ -33,6 +33,5 @@ private:
     CreditsWindow * oknoW;
     oknoWyboruGraczy * oknoWyboru;
     OknoGry * oknoG;
-//    QSoundEffect sfxPrzycisk;
 };
 #endif // MAINWINDOW_H

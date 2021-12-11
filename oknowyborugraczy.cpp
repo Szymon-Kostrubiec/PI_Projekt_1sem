@@ -9,6 +9,11 @@ oknoWyboruGraczy::oknoWyboruGraczy(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Wybierz graczy");
     this->setFixedSize(1000, 700);
+    QPixmap background(":/img/Assets/backgroundOknoStartowe.jpg");
+    background = background.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, background);
+    this->setPalette(palette);
     //animacje
     aniBtnGraj = new QPropertyAnimation(ui->btnGraj, "geometry");
     aniBtnGraj->setKeyValueAt(0, QRectF(600, 570, 340, 90));
