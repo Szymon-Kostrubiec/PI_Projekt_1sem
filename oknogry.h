@@ -21,6 +21,8 @@ public:
     ~OknoGry();
 public slots:
     void przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury);
+
+    void ustawScoreBoard(int wartosc);
 private slots:
 
     void on_btnZakoncz_clicked();

@@ -57,9 +57,28 @@ void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixma
     }
     for (int i = 0; i < liczbaGraczy; i++) {
         gracze.append(new Pionek(tekstury.at(i), nazwyGraczy.at(i)));
+        QObject::connect(gracze.at(i), &Pionek::ustawScoreBoard, this, &OknoGry::ustawScoreBoard);
         plansza->addItem(gracze.at(i)->grafika);
     }
     ui->labelZiarno->setText("Obecne ziarno generatora: " + QString::number(ziarnoGeneratora));
+}
+
+void OknoGry::ustawScoreBoard(int wartosc)
+{
+    switch (aktualnyPionek) {
+    case 0:
+        ui->player1Score->setText(QString::number(wartosc));
+        break;
+    case 1:
+        ui->player2Score->setText(QString::number(wartosc));
+        break;
+    case 2:
+        ui->player3Score->setText(QString::number(wartosc));
+        break;
+    case 3:
+        ui->player4Score->setText(QString::number(wartosc));
+        break;
+    }
 }
 
 void OknoGry::on_btnZakoncz_clicked()
@@ -79,20 +98,6 @@ void OknoGry::on_btnRzut_clicked()
     int losowa = QRandomGenerator::global()->generate() % 6 + 1;
     qDebug() << "Gracz " << aktualnyPionek + 1 << " wylosowal " << losowa;
     gracze.at(aktualnyPionek)->przesun(losowa);
-    switch (aktualnyPionek) {       //czemu to aktualizuje 1 iteracje do tylu?
-    case 0:
-        ui->player1Score->setText(QString::number(gracze.at(aktualnyPionek)->jakiePole()));
-        break;
-    case 1:
-        ui->player2Score->setText(QString::number(gracze.at(aktualnyPionek)->jakiePole()));
-        break;
-    case 2:
-        ui->player3Score->setText(QString::number(gracze.at(aktualnyPionek)->jakiePole()));
-        break;
-    case 3:
-        ui->player4Score->setText(QString::number(gracze.at(aktualnyPionek)->jakiePole()));
-        break;
-    }
     int przesuniecie{};
     if ((przesuniecie = plansza->czyToPoleJestAkcyjne(gracze.at(aktualnyPionek)->jakiePole()))) {   //celowo przez wartosc przypisania
         qDebug() << "Pionek " << aktualnyPionek + 1 << " znalazl sie na akcyjnym polu nr " << przesuniecie;

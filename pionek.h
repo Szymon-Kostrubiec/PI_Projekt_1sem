@@ -17,6 +17,7 @@ public:
     int jakiePole() {qDebug() << aktualnePole; return this->aktualnePole;}        //ta funkcja jest celowo inline
     QString nazwaGracza;
 signals:
+    void ustawScoreBoard(int wartosc);
 private:
     static constexpr float skalaGraczy{7.5f};
     static constexpr int czasAnimacji{500};

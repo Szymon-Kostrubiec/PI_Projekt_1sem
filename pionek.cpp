@@ -30,5 +30,6 @@ void Pionek::animacjaPrzesuwania()
 {
     this->aktualnePole++;
     grafika->setPos(Plansza::wspolrzednePolaGry(this->aktualnePole));
+    this->ustawScoreBoard(aktualnePole);
     if (aktualnePole != poleKoncowe) czasPrzesuwania->start(czasAnimacji);
 }
