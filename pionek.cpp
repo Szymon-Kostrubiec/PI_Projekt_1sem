@@ -26,10 +26,15 @@ void Pionek::wymusPrzesuniecie(int nrPola)
     this->grafika->setPos(Plansza::wspolrzednePolaGry(this->aktualnePole));
 }
 
+int Pionek::jakiePole()
+{
+    return this->poleKoncowe;
+}
+
 void Pionek::animacjaPrzesuwania()
 {
     this->aktualnePole++;
     grafika->setPos(Plansza::wspolrzednePolaGry(this->aktualnePole));
-    this->ustawScoreBoard(aktualnePole);
+    emit ustawScoreBoard(aktualnePole);
     if (aktualnePole != poleKoncowe) czasPrzesuwania->start(czasAnimacji);
 }

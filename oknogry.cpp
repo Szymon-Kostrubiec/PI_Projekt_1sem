@@ -96,9 +96,9 @@ void OknoGry::on_btnRzut_clicked()
 {
     aniBtnRzut->start();
     int losowa = QRandomGenerator::global()->generate() % 6 + 1;
-    qDebug() << "Gracz " << aktualnyPionek + 1 << " wylosowal " << losowa;
     gracze.at(aktualnyPionek)->przesun(losowa);
     int przesuniecie{};
+    qDebug() << gracze.at(aktualnyPionek)->jakiePole();
     if ((przesuniecie = plansza->czyToPoleJestAkcyjne(gracze.at(aktualnyPionek)->jakiePole()))) {   //celowo przez wartosc przypisania
         qDebug() << "Pionek " << aktualnyPionek + 1 << " znalazl sie na akcyjnym polu nr " << przesuniecie;
         gracze.at(aktualnyPionek)->wymusPrzesuniecie(przesuniecie);

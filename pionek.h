@@ -13,8 +13,8 @@ public:
     explicit Pionek(QPixmap tekstura, QString nazwa, QObject *parent = nullptr);
     QGraphicsPixmapItem * grafika;
     void przesun(int oIle);
-    void wymusPrzesuniecie(int nrPola);
-    int jakiePole() {qDebug() << aktualnePole; return this->aktualnePole;}        //ta funkcja jest celowo inline
+    void wymusPrzesuniecie(int nrPola); //uzywane do nieanimowanego przesuniecia gracza przez weza/drabine
+    int jakiePole();
     QString nazwaGracza;
 signals:
     void ustawScoreBoard(int wartosc);
