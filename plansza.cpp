@@ -6,6 +6,7 @@ Plansza::Plansza(bool czyFullScale, QObject *parent) : QGraphicsScene(parent)
     planszaBackground = new QGraphicsPixmapItem(QPixmap(":/img/Assets/PlanszaNowa.png"));
     this->addItem(planszaBackground);
     if (not(czyDuzaSkala)) planszaBackground->setScale(skalaMalejPlanszy);
+
 }
 
 Plansza::~Plansza()
@@ -32,8 +33,7 @@ void Plansza::generujPlansze(long ziarno)
     this->generujZestawPol();
     qDebug() << "Wygenerowano: " << polaDrabiny << " " << celeDrabiny << " " << polaWeze << " " << celeWeze;
     for (int i = 0; i < liczbaDrabin; i++) {
-        listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(sciezkaDoDrabiny)));
-        this->rysujObiekt(true, i);
+        this->rysujDrabine(i);
     }
     for (int i = 0; i < liczbaWezy; i++) {
         listaWeze.append(new QGraphicsPixmapItem(QPixmap(sciezkaDoWeze)));
@@ -115,6 +115,28 @@ void Plansza::generujZestawPol()
         polaWeze.append(koncowePole);
         celeWeze.append(obecnePole);
     }
+}
+
+void Plansza::rysujDrabine(int ktora)
+{
+    QPointF poczatek = this->wspolrzednePolaGry(polaDrabiny.at(ktora));
+    QPointF koniec  = this->wspolrzednePolaGry(celeDrabiny.at(ktora));
+    QPointF roznica = koniec - poczatek;
+    int dlugosc = sqrt(pow(roznica.x(), 2) + pow(roznica.y(), 2));
+    if(dlugosc < 400) listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBKrotka)));
+    else if(dlugosc < 600) listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaKrotka)));
+    else if(dlugosc < 700) listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaDluga)));
+    else if(dlugosc < 900) listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBDluga)));
+    else qDebug() << "Funkcja rysuj drabine dostala zawalu bo skala = " << dlugosc;
+    this->addItem(listaDrabiny.at(ktora));
+    qDebug() << "Dodano drabine";
+    if (czyDuzaSkala) listaDrabiny.at(ktora)->setScale(dlugosc/2000.0f);
+    else listaDrabiny.at(ktora)->setScale(dlugosc/4000.0);
+    listaDrabiny.at(ktora)->setPos(wspolrzednePunktu(polaDrabiny.at(ktora)));
+    float angle{};
+    angle = qAtan2(koniec.y() - poczatek.y(), koniec.x() - poczatek.x());     //w takiej kolejnosci bo tak chce ta funkcja
+    angle = qRadiansToDegrees(angle) + 270;
+    listaDrabiny.at(ktora)->setRotation(angle);
 }
 
 void Plansza::rysujObiekt(bool czyDrabina, int numer)

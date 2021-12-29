@@ -1,12 +1,30 @@
 #include "pionek.h"
 
-Pionek::Pionek(QPixmap tekstura, QString nazwa, QObject *parent)
+Pionek::Pionek(QPixmap tekstura, QString nazwa, int ktory, int ile, QObject *parent)
 {
     this->aktualnePole = 1;
     this->nazwaGracza = nazwa;
     this->grafika = new QGraphicsPixmapItem(tekstura);
     grafika->setScale(skalaGraczy);
     grafika->setPos(Plansza::wspolrzednePolaGry(aktualnePole));
+    qDebug() << "Pionek: " << Plansza::wspolrzednePolaGry(56);
+    // do naprawienia wyswietlanie graczy
+    switch (ktory) {
+    case 1:
+        this->grafika->setOffset(QPointF(300, -200));
+        break;
+    case 2:
+        this->grafika->setOffset(QPointF(-700, -200));
+        break;
+    case 3:
+        this->grafika->setOffset(QPointF(300, -1000));
+        break;
+    case 4:
+        this->grafika->setOffset(QPointF(-700, -1000));
+        break;
+    default:
+        qDebug() << "Konstruktor pionka dostal niepoprawna wartosc!";
+    }
 
     czasPrzesuwania = new QTimer(this);
     czasPrzesuwania->setSingleShot(true);

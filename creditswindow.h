@@ -1,3 +1,4 @@
+
 #ifndef CREDITSWINDOW_H
 #define CREDITSWINDOW_H
 

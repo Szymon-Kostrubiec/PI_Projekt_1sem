@@ -56,7 +56,7 @@ void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixma
             qDebug() << "Wystapil blad w instrukcji switch case.";
     }
     for (int i = 0; i < liczbaGraczy; i++) {
-        gracze.append(new Pionek(tekstury.at(i), nazwyGraczy.at(i)));
+        gracze.append(new Pionek(tekstury.at(i), nazwyGraczy.at(i), i + 1, liczbaGraczy));
         QObject::connect(gracze.at(i), &Pionek::ustawScoreBoard, this, &OknoGry::ustawScoreBoard);
         plansza->addItem(gracze.at(i)->grafika);
     }

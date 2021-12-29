@@ -23,8 +23,12 @@ private:
     bool czyDuzaSkala;
     static constexpr int liczbaDrabin{5};
     static constexpr int liczbaWezy{5};
-    static constexpr float skalaMalejPlanszy{0.38f};
-    QString sciezkaDoDrabiny{":/img/Assets/drabina.png"};
+    static constexpr float skalaMalejPlanszy{0.38};
+//    QString sciezkaDoDrabiny{":/img/Assets/drabina.png"};
+    QString drabinaDluga{":/img/Assets/DrabinaDluga.png"};
+    QString drabinaBDluga{":/img/Assets/DrabinaBDluga.png"};
+    QString drabinaKrotka{":/img/Assets/DrabinaKrotka.png"};
+    QString drabinaBKrotka{":/img/Assets/DrabinaBKrotka.png"};
     QString sciezkaDoWeze{":/img/Assets/waz.png"};
 
     QList<QGraphicsPixmapItem *> listaDrabiny;
@@ -33,6 +37,8 @@ private:
     QList<int> polaDrabiny, polaWeze, celeDrabiny, celeWeze;
 
     void generujZestawPol();
+    void rysujDrabine(int ktora);
+    void rysujWeza(int ktora);
     void rysujObiekt(bool czyDrabina, int numer);
     QPointF wspolrzednePunktu(int nrPola);
 };

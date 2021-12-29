@@ -54,8 +54,9 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
     aniBtnGraj->start();
     qDebug() << "Liczba graczy " << liczbaGraczy;
     QStringList nazwy;
-    //potrzebne walidacje: niewybrania tych samych pionkow, niewybrania tych samych nazw
+     //potrzebne walidacje:niewybrania tych samych pionkow, niewybrania tych samych nazw
     this->liczbaGraczy = 0;
+
     if (ui->nazwaGracz1->text() != "") {
         nazwy.append(ui->nazwaGracz1->text());
         liczbaGraczy++;
@@ -77,8 +78,15 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
         tekstury.append(oknaZGraczami.at(i)->jakaTekstura()->pixmap());
     }
     if (liczbaGraczy  > 1) {
+        if(czy_inne(nazwy))
+        {
         emit przygotuj(liczbaGraczy, nazwy, ui->ziarnoGeneratora->text().toLong(), tekstury);
         this->done(Accepted);
+        }
+        else
+        {
+            ui->labelOstrzezenie->setText("Błedna nazwa graczy.");
+        }
     }
     else {
         ui->labelOstrzezenie->setText("Potrzeba przynajmniej dwóch graczy.");
@@ -94,6 +102,24 @@ void oknoWyboruGraczy::on_btnNowaPlansza_clicked()
     }
     ostatnieZiarno = ui->ziarnoGeneratora->text().toLong();
     plansza->generujPlansze(ui->ziarnoGeneratora->text().toLong());
+}
+
+bool oknoWyboruGraczy::czy_inne(QStringList nazwy)
+{
+    for(int i=0;i<nazwy.length();i++)
+    {
+       if(nazwy.at(i).contains(' '))
+           return false;
+    }
+    for(int i=0;i<nazwy.length();i++)
+    {
+
+       if(nazwy.count(nazwy.at(i))>1)
+       {
+           return false;
+       }
+    }
+    return true;
 }
 
 void oknoWyboruGraczy::on_btnPrawo1_clicked()
