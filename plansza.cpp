@@ -37,8 +37,7 @@ void Plansza::generujPlansze(long ziarno)
         this->rysujDrabine(i);
     }
     for (int i = 0; i < liczbaWezy; i++) {
-        listaWeze.append(new QGraphicsPixmapItem(QPixmap(sciezkaDoWeze)));
-        this->rysujObiekt(false, i);
+        this->rysujWeza(i);
     }
 }
 
@@ -124,54 +123,74 @@ void Plansza::rysujDrabine(int ktora)
     QPointF koniec  = this->wspolrzednePolaGry(celeDrabiny.at(ktora));
     QPointF roznica = koniec - poczatek;
     int dlugosc = sqrt(pow(roznica.x(), 2) + pow(roznica.y(), 2));
-    if(dlugosc < 400) listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBKrotka)));
-    else if(dlugosc < 600) listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaKrotka)));
-    else if(dlugosc < 700) listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaDluga)));
-    else if(dlugosc < 900) listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBDluga)));
+
+    float wspolczynnikSkali{0};
+
+    if (dlugosc < 400) {
+        listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBKrotka)));
+        wspolczynnikSkali = 1;      //do uzupelnienia
+    }
+    else if (dlugosc < 600) {
+        listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaKrotka)));
+        wspolczynnikSkali = 1;
+    }
+    else if (dlugosc < 700) {
+        listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaDluga)));
+        wspolczynnikSkali = 1;
+    }
+    else if (dlugosc < 900) {
+        listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBDluga)));
+        wspolczynnikSkali = 1;
+    }
     else qDebug() << "Funkcja rysuj drabine dostala zawalu bo skala = " << dlugosc;
+
     this->addItem(listaDrabiny.at(ktora));
-    qDebug() << "Dodano drabine";
-    if (czyDuzaSkala) listaDrabiny.at(ktora)->setScale(dlugosc/2000.0f);
-    else listaDrabiny.at(ktora)->setScale(dlugosc/4000.0);
-    listaDrabiny.at(ktora)->setPos(wspolrzednePunktu(polaDrabiny.at(ktora)));
+    if (czyDuzaSkala) listaDrabiny.at(ktora)->setScale(wspolczynnikSkali * dlugosc/2000.0f);
+    else listaDrabiny.at(ktora)->setScale(wspolczynnikSkali * dlugosc/4000.0);
+    listaDrabiny.at(ktora)->setPos(poczatek);
+
+    listaDrabiny.at(ktora)->setOffset(-(listaDrabiny.at(ktora)->boundingRect().width()/2), 0);
+
     float angle{};
     angle = qAtan2(koniec.y() - poczatek.y(), koniec.x() - poczatek.x());     //w takiej kolejnosci bo tak chce ta funkcja
     angle = qRadiansToDegrees(angle) + 270;
     listaDrabiny.at(ktora)->setRotation(angle);
 }
 
-void Plansza::rysujObiekt(bool czyDrabina, int numer)
+void Plansza::rysujWeza(int ktora)
 {
-    if (czyDrabina) {   //rysowanie drabiny
-        QPointF poczatek = this->wspolrzednePunktu(polaDrabiny.at(numer));
-        QPointF koniec = this->wspolrzednePunktu(celeDrabiny.at(numer));
+    //czy tu nie ma pomylenia poczatku z koncem weza???
+    QPointF poczatek = this->wspolrzednePolaGry(polaWeze.at(ktora));
+    QPointF koniec = this->wspolrzednePolaGry(celeWeze.at(ktora));
+    QPointF roznica = koniec - poczatek;
+    int dlugosc = sqrt(pow(roznica.x(), 2) + pow(roznica.y(), 2));
 
-        this->addItem(listaDrabiny.at(numer));
-        listaDrabiny.at(numer)->setPos(wspolrzednePunktu(polaDrabiny.at(numer)));
-        float angle{};
-        angle = qAtan2(koniec.y() - poczatek.y(), koniec.x() - poczatek.x());     //w takiej kolejnosci bo tak chce ta funkcja
-        angle = qRadiansToDegrees(angle) + 270;
-        listaDrabiny.at(numer)->setRotation(angle);
-        float skala{};
-        skala = sqrtf(pow(poczatek.x() - koniec.x(), 2) + pow(poczatek.y() - koniec.x(), 2));
-        skala /= 100.0f;
-        listaDrabiny.at(numer)->setScale(skala);
-    }
-    else {  //rysowanie weza
-        QPointF poczatek = this->wspolrzednePunktu(polaWeze.at(numer));
-        QPointF koniec = this->wspolrzednePunktu(celeWeze.at(numer));
+    float wspolczynnikSkali{0};
 
-        this->addItem(listaWeze.at(numer));
-        listaWeze.at(numer)->setPos(wspolrzednePunktu(polaWeze.at(numer)));
-        float angle{};
-        angle = qAtan2(koniec.y() - poczatek.y(), koniec.x() - poczatek.x());
-        angle = qRadiansToDegrees(angle) + 270;
-        listaWeze.at(numer)->setRotation(angle);
-        float skala{};
-        skala = sqrtf(pow(koniec.x() - poczatek.x(), 2) + pow(koniec.y() - poczatek.y(), 2));
-        skala /= 100.0f;
-        listaWeze.at(numer)->setScale(skala);
+    if (ktora % 2) { //co drugi waz inny
+        listaWeze.append(new QGraphicsPixmapItem(QPixmap(wazRozowy)));
+        wspolczynnikSkali = 1;      //do uzupelnienia
     }
+    else {
+        listaWeze.append(new QGraphicsPixmapItem(QPixmap(wazZielony)));
+        wspolczynnikSkali = 1;
+    }
+    this->addItem(listaWeze.at(ktora));
+    if (czyDuzaSkala) listaWeze.at(ktora)->setScale(wspolczynnikSkali * dlugosc/2000.0f);   //te dwie wartosci tez do dobrania
+    else listaWeze.at(ktora)->setScale(wspolczynnikSkali * dlugosc/4000.0f);
+    listaWeze.at(ktora)->setPos(poczatek);
+
+    listaWeze.at(ktora)->setOffset(-(listaWeze.at(ktora)->boundingRect().width()/2), 0);
+
+    float angle{};
+    angle = qAtan2(koniec.y() - poczatek.y(), koniec.x() - poczatek.x());     //w takiej kolejnosci bo tak chce ta funkcja
+    angle = qRadiansToDegrees(angle) + 270;
+    listaWeze.at(ktora)->setRotation(angle);
+}
+
+void Plansza::rysujObiekt(bool czyDrabina, int numer)       //EOL
+{
+    qDebug() << "Funkcja do wywalenia";
 }
 
 QPointF Plansza::wspolrzednePunktu(int nrPola)

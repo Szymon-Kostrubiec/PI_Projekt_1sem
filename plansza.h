@@ -18,19 +18,22 @@ public:
 signals:
 
 private:
-    QGraphicsPixmapItem * planszaBackground;
-    long ziarnoGeneratora;
-    bool czyDuzaSkala;
+    //zmienne do szybkiej edycji
     static constexpr int liczbaDrabin{5};
     static constexpr int liczbaWezy{5};
     static constexpr float skalaMalejPlanszy{0.38};
-//    QString sciezkaDoDrabiny{":/img/Assets/drabina.png"};
+
     QString drabinaDluga{":/img/Assets/DrabinaDluga.png"};
     QString drabinaBDluga{":/img/Assets/DrabinaBDluga.png"};
     QString drabinaKrotka{":/img/Assets/DrabinaKrotka.png"};
-    QString drabinaBKrotka{":/img/Assets/DrabinaBKrotka.png"};
-    QString sciezkaDoWeze{":/img/Assets/waz.png"};
+    QString drabinaBKrotka{":/img/Assets/DrabniaBKrotka.png"};
 
+    QString wazRozowy{":/img/Assets/wazRozowy.png"};
+    QString wazZielony{":/img/Assets/wazZielony.png"};
+    //zmienne programowe
+    long ziarnoGeneratora;
+    bool czyDuzaSkala;
+    QGraphicsPixmapItem * planszaBackground;
     QList<QGraphicsPixmapItem *> listaDrabiny;
     QList<QGraphicsPixmapItem *> listaWeze;
 

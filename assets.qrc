@@ -22,7 +22,9 @@
         <file>Assets/DrabinaBDluga.png</file>
         <file>Assets/DrabinaDluga.png</file>
         <file>Assets/DrabinaKrotka.png</file>
-        <file>Assets/DrabniaKtorka.png</file>
+        <file>Assets/DrabniaBKrotka.png</file>
+        <file>Assets/wazRozowy.png</file>
+        <file>Assets/wazZielony.png</file>
     </qresource>
     <qresource prefix="/styles">
         <file>Assets/QWidget.qss</file>
