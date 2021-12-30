@@ -43,6 +43,7 @@ private:
     QList<Pionek *> gracze;
     bool czyGraZakonczona;
     QPropertyAnimation * aniBtnRzut;
+    QGraphicsPixmapItem  * grafikaZwyciestwa;
 };
 
 #endif // OKNOGRY_H

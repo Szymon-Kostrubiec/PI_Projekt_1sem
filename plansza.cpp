@@ -119,14 +119,14 @@ void Plansza::generujZestawPol()
 
 void Plansza::rysujDrabine(int ktora)
 {
-    QPointF poczatek = this->wspolrzednePolaGry(polaDrabiny.at(ktora));
-    QPointF koniec  = this->wspolrzednePolaGry(celeDrabiny.at(ktora));
+    QPointF poczatek = this->wspolrzednePunktu(polaDrabiny.at(ktora));
+    QPointF koniec  = this->wspolrzednePunktu(celeDrabiny.at(ktora));
     QPointF roznica = koniec - poczatek;
     int dlugosc = sqrt(pow(roznica.x(), 2) + pow(roznica.y(), 2));
 
     float wspolczynnikSkali{0};
 
-    if (dlugosc < 400) {
+    if (dlugosc < 400) {                                                                                        //WSZYSTKIE WARTOSCI DO DOBRANIA
         listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBKrotka)));
         wspolczynnikSkali = 1;      //do uzupelnienia
     }
@@ -145,7 +145,7 @@ void Plansza::rysujDrabine(int ktora)
     else qDebug() << "Funkcja rysuj drabine dostala zawalu bo skala = " << dlugosc;
 
     this->addItem(listaDrabiny.at(ktora));
-    if (czyDuzaSkala) listaDrabiny.at(ktora)->setScale(wspolczynnikSkali * dlugosc/2000.0f);
+    if (czyDuzaSkala) listaDrabiny.at(ktora)->setScale(wspolczynnikSkali * dlugosc/2000.0f);    //te wartosci do dobrania
     else listaDrabiny.at(ktora)->setScale(wspolczynnikSkali * dlugosc/4000.0);
     listaDrabiny.at(ktora)->setPos(poczatek);
 
@@ -160,8 +160,8 @@ void Plansza::rysujDrabine(int ktora)
 void Plansza::rysujWeza(int ktora)
 {
     //czy tu nie ma pomylenia poczatku z koncem weza???
-    QPointF poczatek = this->wspolrzednePolaGry(polaWeze.at(ktora));
-    QPointF koniec = this->wspolrzednePolaGry(celeWeze.at(ktora));
+    QPointF poczatek = this->wspolrzednePunktu(polaWeze.at(ktora));
+    QPointF koniec = this->wspolrzednePunktu(celeWeze.at(ktora));
     QPointF roznica = koniec - poczatek;
     int dlugosc = sqrt(pow(roznica.x(), 2) + pow(roznica.y(), 2));
 
@@ -209,6 +209,6 @@ QPointF Plansza::wspolrzednePunktu(int nrPola)
         x *= skalaMalejPlanszy;
         y *= skalaMalejPlanszy;
     }
-//    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
+    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
     return QPointF(x, y);
 }

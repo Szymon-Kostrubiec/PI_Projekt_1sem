@@ -25,6 +25,7 @@
         <file>Assets/DrabniaBKrotka.png</file>
         <file>Assets/wazRozowy.png</file>
         <file>Assets/wazZielony.png</file>
+        <file>Assets/WINNER.png</file>
     </qresource>
     <qresource prefix="/styles">
         <file>Assets/QWidget.qss</file>

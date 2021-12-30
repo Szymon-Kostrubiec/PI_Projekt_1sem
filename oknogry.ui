@@ -262,7 +262,7 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>68</pointsize>
+     <pointsize>60</pointsize>
      <italic>false</italic>
      <bold>true</bold>
      <underline>false</underline>

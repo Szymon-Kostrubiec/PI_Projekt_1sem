@@ -25,6 +25,8 @@ OknoGry::OknoGry(QWidget *parent) :
 
     aktualnyPionek = 0;
     this->czyGraZakonczona = false;
+
+    grafikaZwyciestwa = new QGraphicsPixmapItem(QPixmap(":/img/Assets/WINNER.png"));
 }
 
 OknoGry::~OknoGry()
@@ -33,14 +35,7 @@ OknoGry::~OknoGry()
 }
 
 void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury)
-{       //zakomentowane po program spada z rowerka
-    //sprzatanie po poprzedniej generacji
-    for(int i = 0; i <= liczbaGraczy; i++) {
-        plansza->removeItem(gracze.at(i)->grafika);
-
-        //czy tu jest memory leak?
-    }
-    gracze.clear();
+{
     //generacja na nowo
     this->liczbaGraczy = liczba;
     this->nazwyGraczy = nazwy;
@@ -113,6 +108,7 @@ void OknoGry::on_btnRzut_clicked()
     aktualnyPionek++;
     if (aktualnyPionek >= liczbaGraczy) aktualnyPionek = 0;
     ui->labelJestTura->setText("Jest tura gracza " + QString::number(aktualnyPionek + 1));
+    this->setWindowTitle("Węże i drabiny. Tura gracza " + QString::number(aktualnyPionek + 1));
     if (gracze.at(aktualnyPionek)->jakiePole() == 100) {
         zwyciestwo(gracze.at(aktualnyPionek)->nazwaGracza);
     }
@@ -122,7 +118,9 @@ void OknoGry::zwyciestwo(QString nazwaZwyciezcy)
 {
     ui->btnRzut->setEnabled(false);
     ui->labelZwyciestwo->setText("Zwyciężył " + nazwaZwyciezcy);
-
+    plansza->addItem(grafikaZwyciestwa);
+    grafikaZwyciestwa->setScale(1.6);
+    grafikaZwyciestwa->setPos(220, 170);
 }
 
 
