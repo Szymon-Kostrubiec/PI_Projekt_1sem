@@ -1,7 +1,10 @@
 #include "mainwindow.h"
+#include "pionek.h"
 
 #include <QApplication>
 #include <QFile>
+
+int Pionek::iloscGraczy = 0;
 
 int main(int argc, char *argv[])
 {

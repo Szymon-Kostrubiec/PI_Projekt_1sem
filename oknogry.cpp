@@ -33,7 +33,14 @@ OknoGry::~OknoGry()
 }
 
 void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury)
-{
+{       //zakomentowane po program spada z rowerka
+//    //sprzatanie po poprzedniej generacji
+//    for(int i = 0; i <= liczbaGraczy; i++) {
+//        plansza->removeItem(gracze.at(i)->grafika);
+//        gracze.clear();
+//        //czy tu jest memory leak?
+//    }
+    //generacja na nowo
     this->liczbaGraczy = liczba;
     this->nazwyGraczy = nazwy;
     this->ziarnoGeneratora = ziarno;
@@ -53,10 +60,10 @@ void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixma
             ui->player1Score->setText("1");
             break;
         default:
-            qDebug() << "Wystapil blad w instrukcji switch case.";
+            qDebug() << "Wystapil blad w instrukcji switch case przygotowywania planszy";
     }
     for (int i = 0; i < liczbaGraczy; i++) {
-        gracze.append(new Pionek(tekstury.at(i), nazwyGraczy.at(i), i + 1, liczbaGraczy));
+        gracze.append(new Pionek(tekstury.at(i), nazwyGraczy.at(i)));
         QObject::connect(gracze.at(i), &Pionek::ustawScoreBoard, this, &OknoGry::ustawScoreBoard);
         plansza->addItem(gracze.at(i)->grafika);
     }

@@ -10,7 +10,8 @@ class Pionek : public QObject
 {
     Q_OBJECT
 public:
-    explicit Pionek(QPixmap tekstura, QString nazwa, int ktory, int ile, QObject *parent = nullptr);
+    explicit Pionek(QPixmap tekstura, QString nazwa, QObject *parent = nullptr);
+    ~Pionek();
     QGraphicsPixmapItem * grafika;
     void przesun(int oIle);
     void wymusPrzesuniecie(int nrPola); //uzywane do nieanimowanego przesuniecia gracza przez weza/drabine
@@ -21,6 +22,8 @@ signals:
 private:
     static constexpr float skalaGraczy{0.05};
     static constexpr int czasAnimacji{500};
+
+    static int iloscGraczy;
     int aktualnePole;
     int poleKoncowe;
     QTimer * czasPrzesuwania;
@@ -28,5 +31,4 @@ private slots:
     void animacjaPrzesuwania();
 
 };
-
 #endif // PIONEK_H

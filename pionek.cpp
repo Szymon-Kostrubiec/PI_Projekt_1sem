@@ -1,7 +1,8 @@
 #include "pionek.h"
 
-Pionek::Pionek(QPixmap tekstura, QString nazwa, int ktory, int ile, QObject *parent)
+Pionek::Pionek(QPixmap tekstura, QString nazwa, QObject *parent)
 {
+    this->iloscGraczy++;
     this->aktualnePole = 1;
     this->nazwaGracza = nazwa;
     this->grafika = new QGraphicsPixmapItem(tekstura);
@@ -9,7 +10,7 @@ Pionek::Pionek(QPixmap tekstura, QString nazwa, int ktory, int ile, QObject *par
     grafika->setPos(Plansza::wspolrzednePolaGry(aktualnePole));
     qDebug() << "Pionek: " << Plansza::wspolrzednePolaGry(56);
     // do naprawienia wyswietlanie graczy
-    switch (ktory) {
+    switch (this->iloscGraczy) {
     case 1:
         this->grafika->setOffset(QPointF(300, -200));
         break;
@@ -29,6 +30,11 @@ Pionek::Pionek(QPixmap tekstura, QString nazwa, int ktory, int ile, QObject *par
     czasPrzesuwania = new QTimer(this);
     czasPrzesuwania->setSingleShot(true);
     QObject::connect(czasPrzesuwania, &QTimer::timeout, this, &Pionek::animacjaPrzesuwania);
+}
+
+Pionek::~Pionek()
+{
+    this->iloscGraczy--;
 }
 
 void Pionek::przesun(int oIle)

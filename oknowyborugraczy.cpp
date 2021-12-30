@@ -52,9 +52,9 @@ oknoWyboruGraczy::~oknoWyboruGraczy()
 void oknoWyboruGraczy::on_btnGraj_clicked()
 {
     aniBtnGraj->start();
-    qDebug() << "Liczba graczy " << liczbaGraczy;
+
     QStringList nazwy;
-     //potrzebne walidacje:niewybrania tych samych pionkow, niewybrania tych samych nazw
+     //potrzebne walidacje:niewybrania tych samych pionkow
     this->liczbaGraczy = 0;
 
     if (ui->nazwaGracz1->text() != "") {
@@ -77,6 +77,7 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
     for(int i = 0; i < liczbaGraczy; i++) {
         tekstury.append(oknaZGraczami.at(i)->jakaTekstura()->pixmap());
     }
+    qDebug() << "Liczba graczy " << liczbaGraczy;
     if (liczbaGraczy  > 1) {
         if(czy_inne(nazwy))
         {

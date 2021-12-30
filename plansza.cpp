@@ -16,7 +16,7 @@ Plansza::~Plansza()
 void Plansza::generujPlansze(long ziarno)
 {
     this->ziarnoGeneratora = ziarno;
-    //sprzatanie po poprzedniej iteracji
+    //sprzatanie po poprzedniej generacji
     for (int i = 0; i< listaDrabiny.length(); i++) {
         this->removeItem(listaDrabiny.at(i));
         //czy tu jest memory leak?
@@ -30,6 +30,7 @@ void Plansza::generujPlansze(long ziarno)
     polaWeze.clear();
     celeDrabiny.clear();
     celeWeze.clear();
+    //generacja na nowo:
     this->generujZestawPol();
     qDebug() << "Wygenerowano: " << polaDrabiny << " " << celeDrabiny << " " << polaWeze << " " << celeWeze;
     for (int i = 0; i < liczbaDrabin; i++) {
