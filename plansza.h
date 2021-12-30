@@ -42,7 +42,6 @@ private:
     void generujZestawPol();
     void rysujDrabine(int ktora);
     void rysujWeza(int ktora);
-    void rysujObiekt(bool czyDrabina, int numer);
     QPointF wspolrzednePunktu(int nrPola);
 };
 

@@ -34,12 +34,13 @@ OknoGry::~OknoGry()
 
 void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury)
 {       //zakomentowane po program spada z rowerka
-//    //sprzatanie po poprzedniej generacji
-//    for(int i = 0; i <= liczbaGraczy; i++) {
-//        plansza->removeItem(gracze.at(i)->grafika);
-//        gracze.clear();
-//        //czy tu jest memory leak?
-//    }
+    //sprzatanie po poprzedniej generacji
+    for(int i = 0; i <= liczbaGraczy; i++) {
+        plansza->removeItem(gracze.at(i)->grafika);
+
+        //czy tu jest memory leak?
+    }
+    gracze.clear();
     //generacja na nowo
     this->liczbaGraczy = liczba;
     this->nazwyGraczy = nazwy;
@@ -105,10 +106,9 @@ void OknoGry::on_btnRzut_clicked()
     int losowa = QRandomGenerator::global()->generate() % 6 + 1;
     gracze.at(aktualnyPionek)->przesun(losowa);
     int przesuniecie{};
-    qDebug() << gracze.at(aktualnyPionek)->jakiePole();
-    if ((przesuniecie = plansza->czyToPoleJestAkcyjne(gracze.at(aktualnyPionek)->jakiePole()))) {   //celowo przez wartosc przypisania
-        qDebug() << "Pionek " << aktualnyPionek + 1 << " znalazl sie na akcyjnym polu nr " << przesuniecie;
+    if ((przesuniecie = plansza->czyToPoleJestAkcyjne(gracze.at(aktualnyPionek)->jakiePole()))) {
         gracze.at(aktualnyPionek)->wymusPrzesuniecie(przesuniecie);
+        qDebug() << "Gracz nr " << aktualnyPionek + 1 << "spada na głupi łeb.";
     }
     aktualnyPionek++;
     if (aktualnyPionek >= liczbaGraczy) aktualnyPionek = 0;
@@ -123,5 +123,11 @@ void OknoGry::zwyciestwo(QString nazwaZwyciezcy)
     ui->btnRzut->setEnabled(false);
     ui->labelZwyciestwo->setText("Zwyciężył " + nazwaZwyciezcy);
 
+}
+
+
+void OknoGry::on_pushButton_clicked()
+{
+    this->zwyciestwo("Gracz testowy");
 }
 

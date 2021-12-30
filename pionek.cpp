@@ -4,24 +4,24 @@ Pionek::Pionek(QPixmap tekstura, QString nazwa, QObject *parent)
 {
     this->iloscGraczy++;
     this->aktualnePole = 1;
+    this->przesuniecieWymuszone = 0;
     this->nazwaGracza = nazwa;
     this->grafika = new QGraphicsPixmapItem(tekstura);
     grafika->setScale(skalaGraczy);
     grafika->setPos(Plansza::wspolrzednePolaGry(aktualnePole));
-    qDebug() << "Pionek: " << Plansza::wspolrzednePolaGry(56);
     // do naprawienia wyswietlanie graczy
     switch (this->iloscGraczy) {
     case 1:
         this->grafika->setOffset(QPointF(300, -200));
         break;
     case 2:
-        this->grafika->setOffset(QPointF(-700, -200));
+        this->grafika->setOffset(QPointF(-900, -200));
         break;
     case 3:
         this->grafika->setOffset(QPointF(300, -1000));
         break;
     case 4:
-        this->grafika->setOffset(QPointF(-700, -1000));
+        this->grafika->setOffset(QPointF(-900, -1000));
         break;
     default:
         qDebug() << "Konstruktor pionka dostal niepoprawna wartosc!";
@@ -46,8 +46,7 @@ void Pionek::przesun(int oIle)
 
 void Pionek::wymusPrzesuniecie(int nrPola)
 {
-    this->aktualnePole = nrPola;
-    this->grafika->setPos(Plansza::wspolrzednePolaGry(this->aktualnePole));
+    this->przesuniecieWymuszone = nrPola;
 }
 
 int Pionek::jakiePole()
@@ -60,5 +59,12 @@ void Pionek::animacjaPrzesuwania()
     this->aktualnePole++;
     grafika->setPos(Plansza::wspolrzednePolaGry(this->aktualnePole));
     emit ustawScoreBoard(aktualnePole);
+    qDebug() << przesuniecieWymuszone;
     if (aktualnePole != poleKoncowe) czasPrzesuwania->start(czasAnimacji);
+//    else if (przesuniecieWymuszone != 0) {
+//        poleKoncowe -= przesuniecieWymuszone;
+//        aktualnePole = poleKoncowe;
+//        this->grafika->setPos(Plansza::wspolrzednePolaGry(poleKoncowe));
+//        przesuniecieWymuszone = 0;
+//    }
 }

@@ -263,7 +263,6 @@
    <property name="font">
     <font>
      <pointsize>68</pointsize>
-     <weight>75</weight>
      <italic>false</italic>
      <bold>true</bold>
      <underline>false</underline>
@@ -274,6 +273,19 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>1080</x>
+     <y>550</y>
+     <width>161</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Zwyciestwo test</string>
    </property>
   </widget>
   <zorder>player1Label</zorder>
@@ -290,6 +302,7 @@
   <zorder>btnZakoncz</zorder>
   <zorder>labelJestTura</zorder>
   <zorder>labelZwyciestwo</zorder>
+  <zorder>pushButton</zorder>
  </widget>
  <resources/>
  <connections/>

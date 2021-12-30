@@ -188,11 +188,6 @@ void Plansza::rysujWeza(int ktora)
     listaWeze.at(ktora)->setRotation(angle);
 }
 
-void Plansza::rysujObiekt(bool czyDrabina, int numer)       //EOL
-{
-    qDebug() << "Funkcja do wywalenia";
-}
-
 QPointF Plansza::wspolrzednePunktu(int nrPola)
 {
     int x{};

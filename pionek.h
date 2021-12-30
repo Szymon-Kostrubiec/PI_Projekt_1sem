@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QTimer>
+
 #include "plansza.h"
 
 class Pionek : public QObject
@@ -26,6 +27,7 @@ private:
     static int iloscGraczy;
     int aktualnePole;
     int poleKoncowe;
+    int przesuniecieWymuszone;
     QTimer * czasPrzesuwania;
 private slots:
     void animacjaPrzesuwania();

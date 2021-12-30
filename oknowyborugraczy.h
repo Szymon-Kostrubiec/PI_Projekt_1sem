@@ -2,11 +2,11 @@
 #define OKNOWYBORUGRACZY_H
 
 #include <QDialog>
-#include "wyswietlaniegraczy.h"
 #include <QPropertyAnimation>
 #include <QRandomGenerator>
-#include "plansza.h"
 
+#include "plansza.h"
+#include "wyswietlaniegraczy.h"
 namespace Ui {
 class oknoWyboruGraczy;
 }
