@@ -54,7 +54,7 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
     aniBtnGraj->start();
 
     QStringList nazwy;
-     //potrzebne walidacje:niewybrania tych samych pionkow
+     //walidacja tych samych graczy bedzie problematyczna, bo qt nie pozwala porownywac QPixmap
     this->liczbaGraczy = 0;
 
     if (ui->nazwaGracz1->text() != "") {

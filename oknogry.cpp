@@ -15,6 +15,9 @@ OknoGry::OknoGry(QWidget *parent) :
     palette.setBrush(QPalette::Window, background);
     this->setPalette(palette);
 
+    grafikaZwyciestwa = new QGraphicsPixmapItem(QPixmap(":/img/Assets/WINNER.png"));
+
+    // animacje
     aniBtnRzut = new QPropertyAnimation(ui->btnRzut, "geometry");
     aniBtnRzut->setKeyValueAt(0, QRectF(1040, 300, 230, 120));
     aniBtnRzut->setKeyValueAt(0.5, QRectF(1060, 320, 190, 80));
@@ -26,16 +29,18 @@ OknoGry::OknoGry(QWidget *parent) :
     aktualnyPionek = 0;
     this->czyGraZakonczona = false;
 
-    grafikaZwyciestwa = new QGraphicsPixmapItem(QPixmap(":/img/Assets/WINNER.png"));
 }
 
 OknoGry::~OknoGry()
 {
     delete ui;
+    delete grafikaZwyciestwa;
 }
 
 void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury)
 {
+    //potrzebne sprzatanie po poprzedniej generacji
+
     //generacja na nowo
     this->liczbaGraczy = liczba;
     this->nazwyGraczy = nazwy;
@@ -43,7 +48,7 @@ void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixma
     plansza->generujPlansze(ziarnoGeneratora);
     switch (liczbaGraczy) {
         case 4:
-            ui->player4Label->setText(nazwyGraczy.at(3));
+            ui->player4Label->setText(nazwyGraczy.at(3));   //w tej instrukcji switch-case swiadomie pominieto break;
             ui->player4Score->setText("1");
         case 3:
             ui->player3Label->setText(nazwyGraczy.at(2));

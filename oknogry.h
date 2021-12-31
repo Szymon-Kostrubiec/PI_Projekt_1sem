@@ -35,13 +35,15 @@ private:
     void zwyciestwo(QString nazwaZwyciezcy);
 
     int aktualnyPionek;
-    Ui::OknoGry *ui;
     int liczbaGraczy;
     long ziarnoGeneratora;
+    bool czyGraZakonczona;
     QStringList nazwyGraczy;
+
+    Ui::OknoGry *ui;
     Plansza * plansza;
     QList<Pionek *> gracze;
-    bool czyGraZakonczona;
+
     QPropertyAnimation * aniBtnRzut;
     QGraphicsPixmapItem  * grafikaZwyciestwa;
 };

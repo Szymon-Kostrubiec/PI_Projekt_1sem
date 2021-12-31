@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QFile>
 
-int Pionek::iloscGraczy = 0;
+int Pionek::iloscGraczy = 0;    //inicjalizacja zmiennej statycznej
 
 int main(int argc, char *argv[])
 {

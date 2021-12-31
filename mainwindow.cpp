@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setPalette(palette);
     this->setFixedSize(800, 600);
 
-    //zmienne programowe
+    //przygotowanie wszystkich okien
     oknoW = new CreditsWindow;
     oknoWyboru = new oknoWyboruGraczy;
     oknoG = new OknoGry;
@@ -29,11 +29,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_btnGraj_clicked()
 {
 
-    this->hide();
     QObject::connect(oknoWyboru, &oknoWyboruGraczy::przygotuj, oknoG, &OknoGry::przygotuj);
+
+    this->hide();
+
     int wybor = oknoWyboru->exec();
     if (wybor == QDialog::Accepted) {
-//        oknoG->setWindowState(Qt::WindowFullScreen);
         oknoG->exec();
     }
     this->show();

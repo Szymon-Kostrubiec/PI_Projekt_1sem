@@ -17,7 +17,7 @@ public:
     ~CreditsWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_btnPowrot_clicked();
 
 private:
     Ui::CreditsWindow *ui;

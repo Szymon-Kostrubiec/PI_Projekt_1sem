@@ -22,7 +22,7 @@ CreditsWindow::~CreditsWindow()
     delete ui;
 }
 
-void CreditsWindow::on_pushButton_clicked()
+void CreditsWindow::on_btnPowrot_clicked()
 {
     this->done(Accepted);
 }
