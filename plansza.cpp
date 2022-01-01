@@ -15,14 +15,15 @@ Plansza::~Plansza()
 }
 void Plansza::generujPlansze(long ziarno)
 {
-    this->ziarnoGeneratora = ziarno;
     //sprzatanie po poprzedniej generacji
-    for (int i = 0; i< listaDrabiny.length(); i++) {
-        this->removeItem(listaDrabiny.at(i));
-        //czy tu jest memory leak?
+
+    for(auto drabina: listaDrabiny) {
+        this->removeItem(drabina);
+        delete drabina;
     }
-    for (int i = 0; i < listaWeze.length(); i++) {
-        this->removeItem(listaWeze.at(i));
+    for(auto waz: listaWeze) {
+        this->removeItem(waz);
+        delete waz;
     }
     listaDrabiny.clear();
     listaWeze.clear();
@@ -30,7 +31,10 @@ void Plansza::generujPlansze(long ziarno)
     polaWeze.clear();
     celeDrabiny.clear();
     celeWeze.clear();
+
     //generacja na nowo:
+
+    this->ziarnoGeneratora = ziarno;
     this->generujZestawPol();
     qDebug() << "Wygenerowano: " << polaDrabiny << " " << celeDrabiny << " " << polaWeze << " " << celeWeze;
     for (int i = 0; i < liczbaDrabin; i++) {

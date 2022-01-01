@@ -24,7 +24,7 @@ Pionek::Pionek(QPixmap tekstura, QString nazwa, QObject *parent)
         this->grafika->setOffset(QPointF(-900, -1000));
         break;
     default:
-        qDebug() << "Konstruktor pionka dostal niepoprawna wartosc!";
+        qDebug() << "Konstruktor pionka dostal niepoprawna wartosc! Offset nieustalony!!!";
     }
 
     czasPrzesuwania = new QTimer(this);

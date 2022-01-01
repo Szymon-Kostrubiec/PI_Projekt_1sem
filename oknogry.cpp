@@ -39,8 +39,12 @@ OknoGry::~OknoGry()
 
 void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixmap> tekstury)
 {
-    //potrzebne sprzatanie po poprzedniej generacji
-
+    //sprzatanie po poprzedniej generacji
+    for(auto gracz: gracze) {
+        plansza->removeItem(gracz->grafika);
+        delete gracz;
+    }
+    gracze.clear();
     //generacja na nowo
     this->liczbaGraczy = liczba;
     this->nazwyGraczy = nazwy;
