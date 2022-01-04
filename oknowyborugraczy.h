@@ -49,7 +49,7 @@ private:
     QPropertyAnimation * aniBtnStworz;
     long ostatnieZiarno;
     int liczbaGraczy;
-    bool czy_inne(QStringList nazwy);
+    bool czyInne(QStringList nazwy, QList<int> grafiki, QString &komunikat);
 signals:
     void przygotuj(int liczbaGraczy, QStringList nazwy, long ziarno, QList<QPixmap> tekstury);
 };

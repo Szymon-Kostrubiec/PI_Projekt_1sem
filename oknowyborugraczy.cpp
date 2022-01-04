@@ -54,23 +54,28 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
     aniBtnGraj->start();
 
     QStringList nazwy;
+    QList<int> grafiki;
      //walidacja tych samych graczy bedzie problematyczna, bo qt nie pozwala porownywac QPixmap
     this->liczbaGraczy = 0;
 
     if (ui->nazwaGracz1->text() != "") {
         nazwy.append(ui->nazwaGracz1->text());
+        grafiki.append(oknaZGraczami.at(0)->jakiPionek());
         liczbaGraczy++;
     }
     if (ui->nazwaGracz2->text() != "") {
         nazwy.append(ui->nazwaGracz2->text());
+        grafiki.append(oknaZGraczami.at(1)->jakiPionek());
         liczbaGraczy++;
     }
     if (ui->nazwaGracz3->text() != "") {
         nazwy.append(ui->nazwaGracz3->text());
+        grafiki.append(oknaZGraczami.at(2)->jakiPionek());
         liczbaGraczy++;
     }
     if (ui->nazwaGracz4->text() != "") {
         nazwy.append(ui->nazwaGracz4->text());
+        grafiki.append(oknaZGraczami.at(3)->jakiPionek());
         liczbaGraczy++;
     }
     QList<QPixmap> tekstury;
@@ -79,14 +84,15 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
     }
     qDebug() << "Liczba graczy " << liczbaGraczy;
     if (liczbaGraczy  > 1) {
-        if(czy_inne(nazwy))
+        QString komunikat{};
+        if(czyInne(nazwy, grafiki, komunikat))
         {
         emit przygotuj(liczbaGraczy, nazwy, ui->ziarnoGeneratora->text().toLong(), tekstury);
         this->done(Accepted);
         }
         else
         {
-            ui->labelOstrzezenie->setText("Błedna nazwa graczy.");
+            ui->labelOstrzezenie->setText(komunikat);
         }
     }
     else {
@@ -105,20 +111,29 @@ void oknoWyboruGraczy::on_btnNowaPlansza_clicked()
     plansza->generujPlansze(ui->ziarnoGeneratora->text().toLong());
 }
 
-bool oknoWyboruGraczy::czy_inne(QStringList nazwy)
+bool oknoWyboruGraczy::czyInne(QStringList nazwy, QList<int> grafiki, QString &komunikat)
 {
     for(int i=0;i<nazwy.length();i++)
     {
-       if(nazwy.at(i).contains(' '))
+       if(nazwy.at(i).contains(' ')) {
+           komunikat = "Zła nazwa graczy";
            return false;
+        }
     }
     for(int i=0;i<nazwy.length();i++)
     {
 
        if(nazwy.count(nazwy.at(i))>1)
        {
+           komunikat = "Zła nazwa graczy";
            return false;
        }
+    }
+    for(int i = 0; i < grafiki.length(); i++) {
+        if (grafiki.count(grafiki.at(i)) > 1) {
+            komunikat = "Wybrano te same grafiki";
+            return false;
+        }
     }
     return true;
 }

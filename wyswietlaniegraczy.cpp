@@ -32,3 +32,8 @@ QGraphicsPixmapItem *WyswietlanieGraczy::jakaTekstura()
 {
     return this->tekstury.at(ktoWyswietlany);
 }
+
+int WyswietlanieGraczy::jakiPionek()
+{
+    return this->ktoWyswietlany;
+}

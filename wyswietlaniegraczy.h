@@ -12,6 +12,7 @@ public:
     explicit WyswietlanieGraczy(int domyslna, QObject *parent = nullptr);
     void zmianaGracza(int oIle);
     QGraphicsPixmapItem * jakaTekstura();
+    int jakiPionek();
 signals:
 
 private:
