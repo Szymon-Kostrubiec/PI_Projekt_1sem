@@ -7,6 +7,7 @@
 
 #include "plansza.h"
 #include "wyswietlaniegraczy.h"
+
 namespace Ui {
 class oknoWyboruGraczy;
 }

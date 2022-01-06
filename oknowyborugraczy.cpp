@@ -125,7 +125,7 @@ bool oknoWyboruGraczy::czyInne(QStringList nazwy, QList<int> grafiki, QString &k
 
        if(nazwy.count(nazwy.at(i))>1)
        {
-           komunikat = "Zła nazwa graczy";
+           komunikat = "Nazwa nie może zawierać spacji";
            return false;
        }
     }

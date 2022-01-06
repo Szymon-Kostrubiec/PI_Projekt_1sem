@@ -288,6 +288,27 @@
     <string>Zwyciestwo test</string>
    </property>
   </widget>
+  <widget class="QLabel" name="labelInfo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>1011</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>26</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <zorder>player1Label</zorder>
   <zorder>player1Score</zorder>
   <zorder>player2Label</zorder>
@@ -303,6 +324,7 @@
   <zorder>labelJestTura</zorder>
   <zorder>labelZwyciestwo</zorder>
   <zorder>pushButton</zorder>
+  <zorder>labelInfo</zorder>
  </widget>
  <resources/>
  <connections/>

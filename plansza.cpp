@@ -45,36 +45,40 @@ void Plansza::generujPlansze(long ziarno)
     }
 }
 
-QPointF Plansza::wspolrzednePolaGry(int nrPola)
+QPointF Plansza::wspolrzednePolaGry(int numerPola)
 {
-    if (nrPola % 10 == 0) nrPola--;
+    bool czyPelnaDziesiatka{false};
+    if (numerPola % 10 == 0) {
+        numerPola--;
+        czyPelnaDziesiatka = true;
+    }
     int x{};
-    if (nrPola / 10 % 2 == 0) {
-        x = nrPola % 10;
+    if (numerPola / 10 % 2 == 0) {
+        x = numerPola % 10;
         x *= 100;
         x -= 50;
     }
     else {
-        x = 10 - nrPola % 10;
+        x = 10 - numerPola % 10;
         x *= 100;
         x += 50;
     }
     int y{};
-    y = 10 - nrPola / 10;
+    y = 10 - numerPola / 10;
     y *= 100;
     y -= 50;
-    if (nrPola % 10 == 0) {
-        if (nrPola % 10 % 2 == 0) x -= 100;
+    if (czyPelnaDziesiatka) {
+        if ((numerPola + 1) % 10 % 2 == 0) x -= 100;
         else x += 100;
     }
 //    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
     return QPointF(x, y);
 }
 
-int Plansza::czyToPoleJestAkcyjne(int nrPola)
+int Plansza::czyToPoleJestAkcyjne(int numerPola)
 {
-    if (polaDrabiny.count(nrPola)) return celeDrabiny.at(polaDrabiny.indexOf(nrPola));
-    if (polaWeze.count(nrPola)) return celeWeze.at(celeWeze.indexOf(nrPola));
+    if (polaDrabiny.count(numerPola)) return celeDrabiny.at(polaDrabiny.indexOf(numerPola)) - polaDrabiny.at(polaDrabiny.indexOf(numerPola));
+    if (polaWeze.count(numerPola)) return celeWeze.at(celeWeze.indexOf(numerPola)) - polaWeze.at(polaDrabiny.indexOf(numerPola));
     return 0;
 }
 
@@ -88,7 +92,7 @@ void Plansza::generujZestawPol()
     //przerobienie ziarna na poszczegolne wartosci losowe
     if (this->ziarnoGeneratora < 1) ziarnoGeneratora *= -1;
     for (int i = 0; i < 9; i++) {
-        if (i == 0) {       //zle praktyki
+        if (i == 0) {
             losowe.append(this->ziarnoGeneratora % 10);
             continue;
         }
@@ -194,6 +198,11 @@ void Plansza::rysujWeza(int ktora)
 
 QPointF Plansza::wspolrzednePunktu(int nrPola)
 {
+    bool czyPelnaDziesiatka{false};
+    if (nrPola % 10 == 0) {
+        nrPola--;
+        czyPelnaDziesiatka = true;
+    }
     int x{};
     if (nrPola / 10 % 2 == 0) {
         x = nrPola % 10;
@@ -209,10 +218,14 @@ QPointF Plansza::wspolrzednePunktu(int nrPola)
     y = 10 - nrPola / 10;
     y *= 100;
     y -= 50;
+    if (czyPelnaDziesiatka) {
+        if ((nrPola + 1) % 10 % 2 != 0) x -= 100;
+        else x += 100;
+    }
     if (not(czyDuzaSkala)) {
         x *= skalaMalejPlanszy;
         y *= skalaMalejPlanszy;
     }
-    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
+//    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
     return QPointF(x, y);
 }

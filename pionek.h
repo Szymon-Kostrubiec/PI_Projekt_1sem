@@ -11,7 +11,7 @@ class Pionek : public QObject
 {
     Q_OBJECT
 public:
-    explicit Pionek(QPixmap tekstura, QString nazwa, QObject *parent = nullptr);
+    explicit Pionek(QPixmap tekstura, QString nazwa);
     ~Pionek();
     QGraphicsPixmapItem * grafika;
     void przesun(int oIle);
@@ -20,6 +20,7 @@ public:
     QString nazwaGracza;
 signals:
     void ustawScoreBoard(int wartosc);
+    void informujOSpadnieciu(QString informacja);
 private:
     static constexpr float skalaGraczy{0.05};
     static constexpr int czasAnimacji{500};

@@ -1,6 +1,6 @@
 #include "pionek.h"
 
-Pionek::Pionek(QPixmap tekstura, QString nazwa, QObject *parent)
+Pionek::Pionek(QPixmap tekstura, QString nazwa)
 {
     this->iloscGraczy++;
     this->aktualnePole = 1;
@@ -9,7 +9,6 @@ Pionek::Pionek(QPixmap tekstura, QString nazwa, QObject *parent)
     this->grafika = new QGraphicsPixmapItem(tekstura);
     grafika->setScale(skalaGraczy);
     grafika->setPos(Plansza::wspolrzednePolaGry(aktualnePole));
-    // do naprawienia wyswietlanie graczy
     switch (this->iloscGraczy) {
     case 1:
         this->grafika->setOffset(QPointF(300, -200));
@@ -39,6 +38,7 @@ Pionek::~Pionek()
 
 void Pionek::przesun(int oIle)
 {
+    emit informujOSpadnieciu("");
     this->poleKoncowe = aktualnePole + oIle;
     if (poleKoncowe > 100) poleKoncowe = 100;
     czasPrzesuwania->start(czasAnimacji);
@@ -59,12 +59,13 @@ void Pionek::animacjaPrzesuwania()
     this->aktualnePole++;
     grafika->setPos(Plansza::wspolrzednePolaGry(this->aktualnePole));
     emit ustawScoreBoard(aktualnePole);
-    qDebug() << przesuniecieWymuszone;
     if (aktualnePole != poleKoncowe) czasPrzesuwania->start(czasAnimacji);
-//    else if (przesuniecieWymuszone != 0) {
-//        poleKoncowe -= przesuniecieWymuszone;
-//        aktualnePole = poleKoncowe;
-//        this->grafika->setPos(Plansza::wspolrzednePolaGry(poleKoncowe));
-//        przesuniecieWymuszone = 0;
-//    }
+    else if (przesuniecieWymuszone != 0) {
+        aktualnePole += przesuniecieWymuszone;
+        poleKoncowe = aktualnePole;
+        emit informujOSpadnieciu("Graczu, przenosisz sie na pole numer " + QString::number(aktualnePole));
+        emit ustawScoreBoard(aktualnePole);
+        this->grafika->setPos(Plansza::wspolrzednePolaGry(poleKoncowe));
+        przesuniecieWymuszone = 0;
+    }
 }
