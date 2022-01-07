@@ -21,6 +21,7 @@ public:
 signals:
     void ustawScoreBoard(int wartosc);
     void informujOSpadnieciu(QString informacja);
+    void zakonczylemRuch();
 private:
     static constexpr float skalaGraczy{0.05};
     static constexpr int czasAnimacji{500};

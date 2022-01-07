@@ -60,12 +60,15 @@ void Pionek::animacjaPrzesuwania()
     grafika->setPos(Plansza::wspolrzednePolaGry(this->aktualnePole));
     emit ustawScoreBoard(aktualnePole);
     if (aktualnePole != poleKoncowe) czasPrzesuwania->start(czasAnimacji);
-    else if (przesuniecieWymuszone != 0) {
+    else {
+        if (przesuniecieWymuszone != 0) {
         aktualnePole += przesuniecieWymuszone;
         poleKoncowe = aktualnePole;
         emit informujOSpadnieciu("Graczu, przenosisz sie na pole numer " + QString::number(aktualnePole));
         emit ustawScoreBoard(aktualnePole);
         this->grafika->setPos(Plansza::wspolrzednePolaGry(poleKoncowe));
         przesuniecieWymuszone = 0;
+        }
+        emit zakonczylemRuch();
     }
 }

@@ -25,6 +25,8 @@ public slots:
     void ustawScoreBoard(int wartosc);
 
     void informujOSpadnieciu(QString informacja);
+
+    void zakonczylemRuch();
 private slots:
 
     void on_btnZakoncz_clicked();

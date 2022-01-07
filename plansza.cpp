@@ -68,8 +68,8 @@ QPointF Plansza::wspolrzednePolaGry(int numerPola)
     y *= 100;
     y -= 50;
     if (czyPelnaDziesiatka) {
-        if ((numerPola + 1) % 10 % 2 == 0) x -= 100;
-        else x += 100;
+        if ((numerPola + 1) / 10 % 2) x += 100;
+        else x -= 100;
     }
 //    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
     return QPointF(x, y);
@@ -77,8 +77,8 @@ QPointF Plansza::wspolrzednePolaGry(int numerPola)
 
 int Plansza::czyToPoleJestAkcyjne(int numerPola)
 {
-    if (polaDrabiny.count(numerPola)) return celeDrabiny.at(polaDrabiny.indexOf(numerPola)) - polaDrabiny.at(polaDrabiny.indexOf(numerPola));
-    if (polaWeze.count(numerPola)) return celeWeze.at(celeWeze.indexOf(numerPola)) - polaWeze.at(polaDrabiny.indexOf(numerPola));
+    if (polaDrabiny.count(numerPola)) return celeDrabiny.at(polaDrabiny.indexOf(numerPola)) - numerPola;
+    if (polaWeze.count(numerPola)) return celeWeze.at(polaWeze.indexOf(numerPola)) - numerPola;
     return 0;
 }
 

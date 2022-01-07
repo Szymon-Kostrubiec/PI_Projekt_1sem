@@ -29,9 +29,6 @@ OknoGry::OknoGry(QWidget *parent) :
     aktualnyPionek = 0;
     this->czyGraZakonczona = false;
 
-    //////////////////
-    qDebug() << "Wspolrzedne pola 10: " << Plansza::wspolrzednePolaGry(10);
-    qDebug() << "Wspolrzedne pola 20: " << Plansza::wspolrzednePolaGry(20);
 }
 
 OknoGry::~OknoGry()
@@ -74,6 +71,7 @@ void OknoGry::przygotuj(int liczba, QStringList nazwy, long ziarno, QList<QPixma
         gracze.append(new Pionek(tekstury.at(i), nazwyGraczy.at(i)));
         QObject::connect(gracze.at(i), &Pionek::ustawScoreBoard, this, &OknoGry::ustawScoreBoard);
         QObject::connect(gracze.at(i), &Pionek::informujOSpadnieciu, this, &OknoGry::informujOSpadnieciu);
+        QObject::connect(gracze.at(i), &Pionek::zakonczylemRuch, this, &OknoGry::zakonczylemRuch);
         plansza->addItem(gracze.at(i)->grafika);
     }
     ui->labelZiarno->setText("Obecne ziarno generatora: " + QString::number(ziarnoGeneratora));
@@ -100,6 +98,13 @@ void OknoGry::ustawScoreBoard(int wartosc)
 void OknoGry::informujOSpadnieciu(QString informacja)
 {
     ui->labelInfo->setText(informacja);
+}
+
+void OknoGry::zakonczylemRuch()
+{
+    ui->btnRzut->setEnabled(true);
+    aktualnyPionek++;
+    if (aktualnyPionek >= liczbaGraczy) aktualnyPionek = 0;
 }
 
 void OknoGry::on_btnZakoncz_clicked()
@@ -129,9 +134,7 @@ void OknoGry::on_btnRzut_clicked()
     if (gracze.at(aktualnyPionek)->jakiePole() == 100) {
         zwyciestwo(gracze.at(aktualnyPionek)->nazwaGracza);
     }
-
-    aktualnyPionek++;
-    if (aktualnyPionek >= liczbaGraczy) aktualnyPionek = 0;
+    ui->btnRzut->setEnabled(false);
 }
 
 void OknoGry::zwyciestwo(QString nazwaZwyciezcy)
