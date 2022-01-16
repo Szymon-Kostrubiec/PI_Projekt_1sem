@@ -71,7 +71,6 @@ QPointF Plansza::wspolrzednePolaGry(int numerPola)
         if ((numerPola + 1) / 10 % 2) x += 100;
         else x -= 100;
     }
-//    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
     return QPointF(x, y);
 }
 
@@ -107,7 +106,7 @@ void Plansza::generujZestawPol()
         do {
             koncowePole = obecnePole + (10 * (losowe.at(i) % 3 + 1)) + (5 + losowe.at(i)) % 4;    //ta 8 tam jest dla zwiekszenia losowosci
             losowe[i] += 7;
-        } while(koncowePole % 10 == 0 or koncowePole % 10 == 1 or polaDrabiny.count(koncowePole) or polaDrabiny.count(koncowePole) or koncowePole > 98);
+        } while(polaDrabiny.count(koncowePole) or polaDrabiny.count(koncowePole) or koncowePole > 95);
         celeDrabiny.append(koncowePole);
     }
     qDebug() << "Rozpoczeto generacje wezy";
@@ -119,7 +118,7 @@ void Plansza::generujZestawPol()
         do {
             koncowePole = obecnePole + (10 * (losowe.at(i) % 3 + 1)) + (6 + losowe.at(i)) % 4;
             losowe[i] += 1;
-        } while(koncowePole % 10 == 0 or koncowePole % 10 == 1 or polaDrabiny.count(koncowePole) or polaDrabiny.count(koncowePole) or koncowePole > 98);
+        } while(polaDrabiny.count(koncowePole) or polaDrabiny.count(koncowePole) or koncowePole > 95);
         polaWeze.append(koncowePole);
         celeWeze.append(obecnePole);
     }
@@ -132,29 +131,33 @@ void Plansza::rysujDrabine(int ktora)
     QPointF roznica = koniec - poczatek;
     int dlugosc = sqrt(pow(roznica.x(), 2) + pow(roznica.y(), 2));
 
-    float wspolczynnikSkali{0};
+    float wspolczynnikSkali{};
+    float wspolczynnikOkna{1};
 
-    if (dlugosc < 400) {                                                                                        //WSZYSTKIE WARTOSCI DO DOBRANIA
+    if (not(czyDuzaSkala))
+        wspolczynnikOkna = 0.4f;
+
+    if (dlugosc < 300 * wspolczynnikOkna) {
         listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBKrotka)));
-        wspolczynnikSkali = 1;      //do uzupelnienia
+        wspolczynnikSkali = 1;
     }
-    else if (dlugosc < 600) {
+    else if (dlugosc < 450 * wspolczynnikOkna) {
         listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaKrotka)));
-        wspolczynnikSkali = 1;
+        wspolczynnikSkali = 0.68;
     }
-    else if (dlugosc < 700) {
+    else if (dlugosc < 600 * wspolczynnikOkna) {
         listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaDluga)));
-        wspolczynnikSkali = 1;
+        wspolczynnikSkali = 0.5;
     }
-    else if (dlugosc < 900) {
+    else if (dlugosc < 900 * wspolczynnikOkna) {
         listaDrabiny.append(new QGraphicsPixmapItem(QPixmap(drabinaBDluga)));
-        wspolczynnikSkali = 1;
+        wspolczynnikSkali = 0.3;
     }
-    else qDebug() << "Funkcja rysuj drabine dostala zawalu bo skala = " << dlugosc;
+    else qDebug() << "Funkcja rysuj drabine wygenerowala niepoprawne dane poniewaz dlugosc: " << dlugosc;
+
 
     this->addItem(listaDrabiny.at(ktora));
-    if (czyDuzaSkala) listaDrabiny.at(ktora)->setScale(wspolczynnikSkali * dlugosc/2000.0f);    //te wartosci do dobrania
-    else listaDrabiny.at(ktora)->setScale(wspolczynnikSkali * dlugosc/4000.0);
+    listaDrabiny.at(ktora)->setScale(wspolczynnikSkali*dlugosc / 400.0f);
     listaDrabiny.at(ktora)->setPos(poczatek);
 
     listaDrabiny.at(ktora)->setOffset(-(listaDrabiny.at(ktora)->boundingRect().width()/2), 0);
@@ -167,7 +170,7 @@ void Plansza::rysujDrabine(int ktora)
 
 void Plansza::rysujWeza(int ktora)
 {
-    //czy tu nie ma pomylenia poczatku z koncem weza???
+
     QPointF poczatek = this->wspolrzednePunktu(polaWeze.at(ktora));
     QPointF koniec = this->wspolrzednePunktu(celeWeze.at(ktora));
     QPointF roznica = koniec - poczatek;
@@ -177,15 +180,14 @@ void Plansza::rysujWeza(int ktora)
 
     if (ktora % 2) { //co drugi waz inny
         listaWeze.append(new QGraphicsPixmapItem(QPixmap(wazRozowy)));
-        wspolczynnikSkali = 1;      //do uzupelnienia
+        wspolczynnikSkali = 1.5;
     }
     else {
         listaWeze.append(new QGraphicsPixmapItem(QPixmap(wazZielony)));
-        wspolczynnikSkali = 1;
+        wspolczynnikSkali = 1.5;
     }
     this->addItem(listaWeze.at(ktora));
-    if (czyDuzaSkala) listaWeze.at(ktora)->setScale(wspolczynnikSkali * dlugosc/2000.0f);   //te dwie wartosci tez do dobrania
-    else listaWeze.at(ktora)->setScale(wspolczynnikSkali * dlugosc/4000.0f);
+    listaWeze.at(ktora)->setScale(wspolczynnikSkali * dlugosc/2000.0f);
     listaWeze.at(ktora)->setPos(poczatek);
 
     listaWeze.at(ktora)->setOffset(-(listaWeze.at(ktora)->boundingRect().width()/2), 0);
@@ -226,6 +228,5 @@ QPointF Plansza::wspolrzednePunktu(int nrPola)
         x *= skalaMalejPlanszy;
         y *= skalaMalejPlanszy;
     }
-//    qDebug() << "Wspolrzedne pola " << nrPola << " " << x << " " << y;
     return QPointF(x, y);
 }

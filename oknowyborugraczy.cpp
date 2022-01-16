@@ -55,7 +55,6 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
 
     QStringList nazwy;
     QList<int> grafiki;
-     //walidacja tych samych graczy bedzie problematyczna, bo qt nie pozwala porownywac QPixmap
     this->liczbaGraczy = 0;
 
     if (ui->nazwaGracz1->text() != "") {
@@ -102,7 +101,7 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
 
 void oknoWyboruGraczy::on_btnNowaPlansza_clicked()
 {
-    //potrzebna walidacja wprowadzonej zmiennej (czy jest cyfra)
+
     aniBtnStworz->start();
     if (ui->ziarnoGeneratora->text() == "" or ostatnieZiarno == ui->ziarnoGeneratora->text().toLong()) {
         ui->ziarnoGeneratora->setText(QString::number(QRandomGenerator::global()->generate()));

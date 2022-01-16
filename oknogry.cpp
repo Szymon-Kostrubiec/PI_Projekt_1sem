@@ -102,7 +102,11 @@ void OknoGry::informujOSpadnieciu(QString informacja)
 
 void OknoGry::zakonczylemRuch()
 {
-    ui->btnRzut->setEnabled(true);
+    if (gracze.at(aktualnyPionek)->jakiePole() == 100) {
+        zwyciestwo(gracze.at(aktualnyPionek)->nazwaGracza);
+    }
+    if (not(czyGraZakonczona))
+        ui->btnRzut->setEnabled(true);
     aktualnyPionek++;
     if (aktualnyPionek >= liczbaGraczy) aktualnyPionek = 0;
 }
@@ -130,25 +134,16 @@ void OknoGry::on_btnRzut_clicked()
     }
     ui->labelJestTura->setText("Jest tura gracza " + QString::number(aktualnyPionek + 1));
     this->setWindowTitle("Węże i drabiny. Tura gracza " + QString::number(aktualnyPionek + 1));
-
-    if (gracze.at(aktualnyPionek)->jakiePole() == 100) {
-        zwyciestwo(gracze.at(aktualnyPionek)->nazwaGracza);
-    }
     ui->btnRzut->setEnabled(false);
 }
 
 void OknoGry::zwyciestwo(QString nazwaZwyciezcy)
 {
     ui->btnRzut->setEnabled(false);
+    czyGraZakonczona = true;
     ui->labelZwyciestwo->setText("Zwyciężył " + nazwaZwyciezcy);
     plansza->addItem(grafikaZwyciestwa);
     grafikaZwyciestwa->setScale(1.6);
     grafikaZwyciestwa->setPos(220, 170);
-}
-
-
-void OknoGry::on_pushButton_clicked()
-{
-    this->zwyciestwo("Gracz testowy");
 }
 

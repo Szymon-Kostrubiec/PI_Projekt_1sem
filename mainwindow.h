@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QPropertyAnimation>
-#include <QMediaPlayer>
 
 #include "creditswindow.h"
 #include "oknowyborugraczy.h"

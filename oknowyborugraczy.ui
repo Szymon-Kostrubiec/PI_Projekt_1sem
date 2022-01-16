@@ -38,7 +38,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Debug1</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -99,7 +99,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Debug2</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -391,7 +391,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Tu będą ostrzerzenia jak gracz coś popsuje</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

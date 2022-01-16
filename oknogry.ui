@@ -275,19 +275,6 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>1080</x>
-     <y>550</y>
-     <width>161</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Zwyciestwo test</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="labelInfo">
    <property name="geometry">
     <rect>
@@ -323,7 +310,6 @@
   <zorder>btnZakoncz</zorder>
   <zorder>labelJestTura</zorder>
   <zorder>labelZwyciestwo</zorder>
-  <zorder>pushButton</zorder>
   <zorder>labelInfo</zorder>
  </widget>
  <resources/>

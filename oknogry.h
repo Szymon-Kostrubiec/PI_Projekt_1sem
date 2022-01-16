@@ -33,8 +33,6 @@ private slots:
 
     void on_btnRzut_clicked();
 
-    void on_pushButton_clicked();
-
 private:
     void zwyciestwo(QString nazwaZwyciezcy);
 
