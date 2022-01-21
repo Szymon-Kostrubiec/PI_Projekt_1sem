@@ -47,6 +47,7 @@ oknoWyboruGraczy::oknoWyboruGraczy(QWidget *parent) :
 oknoWyboruGraczy::~oknoWyboruGraczy()
 {
     delete ui;
+    delete plansza;
 }
 
 void oknoWyboruGraczy::on_btnGraj_clicked()
@@ -54,39 +55,41 @@ void oknoWyboruGraczy::on_btnGraj_clicked()
     aniBtnGraj->start();
 
     QStringList nazwy;
-    QList<int> grafiki;
+    QList<QPixmap> grafiki;
+    QList<int> grafikiInt;
     this->liczbaGraczy = 0;
 
     if (ui->nazwaGracz1->text() != "") {
         nazwy.append(ui->nazwaGracz1->text());
-        grafiki.append(oknaZGraczami.at(0)->jakiPionek());
+        grafiki.append(oknaZGraczami.at(0)->jakaTekstura()->pixmap());
+        grafikiInt.append(oknaZGraczami.at(0)->jakiPionek());
         liczbaGraczy++;
     }
     if (ui->nazwaGracz2->text() != "") {
         nazwy.append(ui->nazwaGracz2->text());
-        grafiki.append(oknaZGraczami.at(1)->jakiPionek());
+        grafiki.append(oknaZGraczami.at(1)->jakaTekstura()->pixmap());
+        grafikiInt.append(oknaZGraczami.at(1)->jakiPionek());
         liczbaGraczy++;
     }
     if (ui->nazwaGracz3->text() != "") {
         nazwy.append(ui->nazwaGracz3->text());
-        grafiki.append(oknaZGraczami.at(2)->jakiPionek());
+        grafiki.append(oknaZGraczami.at(2)->jakaTekstura()->pixmap());
+        grafikiInt.append(oknaZGraczami.at(2)->jakiPionek());
         liczbaGraczy++;
     }
     if (ui->nazwaGracz4->text() != "") {
         nazwy.append(ui->nazwaGracz4->text());
-        grafiki.append(oknaZGraczami.at(3)->jakiPionek());
+        grafiki.append(oknaZGraczami.at(3)->jakaTekstura()->pixmap());
+        grafikiInt.append(oknaZGraczami.at(3)->jakiPionek());
         liczbaGraczy++;
     }
-    QList<QPixmap> tekstury;
-    for(int i = 0; i < liczbaGraczy; i++) {
-        tekstury.append(oknaZGraczami.at(i)->jakaTekstura()->pixmap());
-    }
+
     qDebug() << "Liczba graczy " << liczbaGraczy;
     if (liczbaGraczy  > 1) {
         QString komunikat{};
-        if(czyInne(nazwy, grafiki, komunikat))
+        if(czyInne(nazwy, grafikiInt, komunikat))
         {
-        emit przygotuj(liczbaGraczy, nazwy, ui->ziarnoGeneratora->text().toLong(), tekstury);
+        emit przygotuj(liczbaGraczy, nazwy, ui->ziarnoGeneratora->text().toLong(), grafiki);
         this->done(Accepted);
         }
         else
@@ -115,7 +118,7 @@ bool oknoWyboruGraczy::czyInne(QStringList nazwy, QList<int> grafiki, QString &k
     for(int i=0;i<nazwy.length();i++)
     {
        if(nazwy.at(i).contains(' ')) {
-           komunikat = "Zła nazwa graczy";
+           komunikat = "Nazwa nie moze zawierać spacji";
            return false;
         }
     }
@@ -124,7 +127,7 @@ bool oknoWyboruGraczy::czyInne(QStringList nazwy, QList<int> grafiki, QString &k
 
        if(nazwy.count(nazwy.at(i))>1)
        {
-           komunikat = "Nazwa nie może zawierać spacji";
+           komunikat = "Nazwy graczy sie powtórzyły.";
            return false;
        }
     }

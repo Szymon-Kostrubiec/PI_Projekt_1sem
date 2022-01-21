@@ -17,7 +17,7 @@ signals:
 
 private:
     static constexpr float skalaGraczy{0.13};
-    int ktoWyswietlany;     //czy nie lepiej pixmap???
+    int ktoWyswietlany;
     QList<QGraphicsPixmapItem *> tekstury;
 };
 
